@@ -2,3 +2,4 @@
 .idea
 resources/brewfile.lock.json
 resources/xdebug.sh.lock.json
+fonts
