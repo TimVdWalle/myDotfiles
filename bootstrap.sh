@@ -28,16 +28,23 @@ source ./resources/xdebug.sh
 echo "Linking local dotfiles folder with github..."
 source ./resources/link_github.sh
 
+# Cloning my other repositories to local
+echo "Cloning my other repositories to local..."
+source ./resources/github_repositories.sh
+
+# Installing zsh etc
+echo "Installing zsh etc..."
+source ./resources/shell.sh
+
 # Showing installation overview
 echo "Showing installation overview..."
 source ./resources/overview.sh
 
 
 
-## Check for Oh My Zsh and install if we don't have it
-#if test ! $(which omz); then
-#  /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
-#fi
+
+
+
 #
 ## Check for Homebrew and install if we don't have it
 #if test ! $(which brew); then
