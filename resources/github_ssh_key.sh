@@ -33,6 +33,8 @@ else
     echo "Skipping creation of ssh key for github"
 fi;
 
+print_after_newline "print_with_newline"
+
 
 #print_after_newline "print_with_newline"
 
