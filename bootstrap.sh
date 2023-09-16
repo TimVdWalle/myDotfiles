@@ -7,6 +7,10 @@ echo "Loading helper functions..."
 source ./resources/utils.sh
 source ./resources/utils-macos.sh
 
+# Setting ssh key (for github)
+echo "Setting ssh key for github..."
+source ./resources/github_ssh_key.sh
+
 # Installing HomeBrew
 echo "Installing HomeBrew..."
 source ./resources/install_homebrew.sh
@@ -14,17 +18,19 @@ source ./resources/install_homebrew.sh
 # Installing tools + apps
 echo "Installing tools + apps..."
 brew bundle --file ./resources/brewfile
+print_after_newline "print_with_newline"
 
-# Setup ssh key (for github)
-ask_for_confirmation "Do you want to setup a new ssh key for github?"
-if answer_is_yes; then
-    print_after_newline "print_with_newline"
-    echo "Generating ssh key for github"
-    source ./resources/create_ssh_key.sh
-else
-    print_after_newline "print_with_newline"
-    echo "Skipping creation of ssh key for github"
-fi;
+# Installing Xdebug
+echo "Installing Xdebug..."
+source ./resources/xdebug.sh
+
+# Linking local dotfiles folder with github
+echo "Linking local dotfiles folder with github..."
+source ./resources/link_github.sh
+
+# Showing installation overview
+echo "Showing installation overview..."
+source ./resources/overview.sh
 
 
 
