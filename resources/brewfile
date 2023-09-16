@@ -1,0 +1,31 @@
+tap 'homebrew/cask-fonts'
+tap 'homebrew/cask-versions'
+tap 'homebrew/bundle'
+
+# Dev
+#brew 'composer'    # Not needed when installing herd (herd = php, composer, laravel)
+brew 'coreutils'    # Those that come with macOS are outdated
+brew 'git'
+#brew 'httpie'
+brew 'node'
+
+# System
+brew 'mackup'
+brew 'mas'          # Mac App Store manager
+
+# Apps
+cask 'arduino-ide'
+cask 'colorpicker-skalacolor'
+cask 'dbngin'
+cask 'fork'
+cask 'google-chrome'
+cask 'herd'
+cask 'hyper'
+cask 'iterm2'
+cask 'logitech-options'
+cask 'phpstorm'
+cask 'sequel-ace'
+cask 'spotify'
+cask 'steam'
+cask 'tableplus'
+cask 'visual-studio-code'
