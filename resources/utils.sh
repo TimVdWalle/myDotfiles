@@ -32,7 +32,8 @@ ask_for_input() {
 
 ask_for_confirmation() {
     print_question "$1 (y/n) "
-    read -r -n 1
+    #read -r -n 1
+    read -r
 }
 
 ask_for_sudo() {
