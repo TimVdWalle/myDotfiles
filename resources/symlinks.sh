@@ -1,11 +1,9 @@
 #!/bin/sh
 
-brew install php
-pecl install xdebug
-
-echo "Update php.ini: find correct location of php.ini in Herd UI"
-echo "See documentation on : https://herd.laravel.com/docs/1/advanced-usage/xdebug"
-echo "Press enter to continue"
-read waiting
+if [ ! -e ~/Projects ]; then
+  ln -s ~/Documents.nosync/Projects/ ~/
+else
+  echo "The directory or symlink '~/Projects' already exists. Aborting."
+fi
 
 print_after_newline "print_with_newline"
