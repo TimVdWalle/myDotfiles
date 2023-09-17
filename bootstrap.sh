@@ -36,6 +36,10 @@ source ./resources/github_repositories.sh
 echo "Installing zsh etc..."
 source ./resources/shell.sh
 
+# Creating symlinks
+echo "Creating symlinks..."
+source ./resources/symlinks.sh
+
 # Showing installation overview
 echo "Showing installation overview..."
 source ./resources/overview.sh
