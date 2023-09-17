@@ -13,7 +13,6 @@ brew install --cask font-nerd-fonts
 brew install --cask font-fira-code
 
 brew install starship
-echo  "\xee\x82\xa0" #> 
 
 # install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -25,3 +24,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 git clone https://github.com/powerline/fonts.git --depth=1
 cd fonts
 ./install.sh
+cd ..
+
+print_after_newline "print_with_newline"
