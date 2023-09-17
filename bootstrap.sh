@@ -33,8 +33,8 @@ echo "Cloning my other repositories to local..."
 source ./resources/github_repositories.sh
 
 # Installing zsh etc
-echo "Installing zsh etc..."
-source ./resources/shell.sh
+#echo "Installing zsh etc..."
+#source ./resources/shell.sh
 
 # Creating symlinks
 echo "Creating symlinks..."
