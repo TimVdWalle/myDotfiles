@@ -34,7 +34,7 @@ echo "Cloning my other repositories to local..."
 
 # Installing zsh etc
 echo "Installing zsh etc..."
-source ./resources/shell.sh
+#source ./resources/shell.sh
 
 # Creating symlinks
 echo "Creating symlinks..."
