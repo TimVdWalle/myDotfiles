@@ -44,6 +44,10 @@ echo "Creating symlinks..."
 echo "Loading macos settings..."
 #source ./resources/macos.sh
 
+# Symlinking dotfiles
+echo "Symlinking dotfiles..."
+source ./resources/symlink_dotfiles.sh
+
 
 
 # Showing installation overview
