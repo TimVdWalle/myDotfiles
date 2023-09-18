@@ -36,6 +36,7 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
+ZSH_COLORIZE_TOOL=chroma
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -121,3 +122,43 @@ zstyle ':prompt:pure:prompt:success' color blue
 zstyle :prompt:pure:git:stash show yes
 
 prompt pure
+
+
+#############################################
+#
+#   antigen
+#
+#############################################
+source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
+antigen init $HOME/.antigenrc
+
+
+#############################################
+#
+#   the fuck
+#   https://github.com/nvbn/thefuck#installation
+#
+#############################################
+eval $(thefuck --alias FUCK)
+eval $(thefuck --alias)
+
+
+
+#############################################
+#
+#   my terminal preferences
+#
+#############################################
+set history=5000
+
+
+#############################################
+#
+#   load aliases
+#
+#############################################
+alias week='date +%V'
+alias h="history"
+alias cat="ccat"
+alias grep='grep --color=auto '
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
