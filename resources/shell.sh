@@ -11,13 +11,25 @@ fi
 brew tap homebrew/cask-fonts
 brew install font-hack-nerd-font
 
+# Install powerline fonts
+git clone https://github.com/powerline/fonts.git --depth=1
+cd fonts
+./install.sh
+cd ..
+#rm -rf fonts/
+
 # Install the pure prompt : https://github.com/sindresorhus/pure
 brew install pure
 
 # Install the color scheme that goes beautifully with the pure prompt
+# installing hyper theme before hyper was opened for the first time makes it crash
+echo "Open hyper terminal app, and close it again"
+echo "Press enter to continue..."
+read waiting
 hyper install hyper-snazzy
 
-
+# install antigen : Antigen is a small set of functions that help you easily manage your shell (zsh) plugins, called bundles
+brew install antigen
 
 # write settings to .zshrc
 
@@ -29,19 +41,11 @@ hyper install hyper-snazzy
 #brew install --cask font-nerd-fonts
 #brew install --cask font-fira-code
 
-#brew install starship
 
-## install oh-my-zsh
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 
 ##https://timonbimon.medium.com/yet-another-step-by-step-guide-for-a-better-terminal-setup-6c5e879d4c8c
 
-# Install powerline fonts
-git clone https://github.com/powerline/fonts.git --depth=1
-cd fonts
-./install.sh
-cd ..
-rm -rf fonts/
+
 
 #print_after_newline "print_with_newline"#

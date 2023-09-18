@@ -22,7 +22,7 @@ print_after_newline "print_with_newline"
 
 # Installing Xdebug
 echo "Installing Xdebug..."
-#source ./resources/xdebug.sh
+source ./resources/xdebug.sh
 
 # Linking local dotfiles folder with github
 echo "Linking local dotfiles folder with github..."
@@ -34,9 +34,9 @@ echo "Cloning my other repositories to local..."
 
 # Installing zsh etc
 echo "Installing zsh etc..."
-#source ./resources/shell.sh
+source ./resources/shell.sh
 
-# Creating symlinks
+# Creating symlinks (folders etc, no dotfiles)
 echo "Creating symlinks..."
 #source ./resources/symlinks.sh
 
