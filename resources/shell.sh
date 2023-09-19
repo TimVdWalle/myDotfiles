@@ -31,7 +31,7 @@ hyper install hyper-snazzy
 # install antigen : Antigen is a small set of functions that help you easily manage your shell (zsh) plugins, called bundles
 brew install antigen
 brew install thefuck
-brew uninstall chroma
+brew install chroma
 brew install ccat
 
 # write settings to .zshrc
