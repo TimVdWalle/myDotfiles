@@ -9,15 +9,15 @@ source ./resources/utils-macos.sh
 
 # Setting ssh key (for github)
 echo "Setting ssh key for github..."
-#source ./resources/github_ssh_key.sh
+source ./resources/github_ssh_key.sh
 
 # Installing HomeBrew
 echo "Installing HomeBrew..."
-#source ./resources/install_homebrew.sh
+source ./resources/install_homebrew.sh
 
 # Installing tools + apps
 echo "Installing tools + apps..."
-#brew bundle --file ./resources/brewfile
+brew bundle --file ./resources/brewfile
 print_after_newline "print_with_newline"
 
 # Installing Xdebug
@@ -26,11 +26,11 @@ source ./resources/xdebug.sh
 
 # Linking local dotfiles folder with github
 echo "Linking local dotfiles folder with github..."
-#source ./resources/link_github.sh
+source ./resources/link_github.sh
 
 # Cloning my other repositories to local
 echo "Cloning my other repositories to local..."
-#source ./resources/github_repositories.sh
+source ./resources/github_repositories.sh
 
 # Installing zsh etc
 echo "Installing zsh etc..."
@@ -38,11 +38,11 @@ source ./resources/shell.sh
 
 # Creating symlinks (folders etc, no dotfiles)
 echo "Creating symlinks..."
-#source ./resources/symlinks.sh
+source ./resources/symlinks.sh
 
 # Loading macos settings
 echo "Loading macos settings..."
-#source ./resources/macos.sh
+source ./resources/macos.sh
 
 # Symlinking dotfiles
 echo "Symlinking dotfiles..."
