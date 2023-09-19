@@ -1,5 +1,6 @@
 #!/bin/sh
 
+export PATH="$PATH:$HOME/Library/Application Support/Herd/bin/"
 php --version
 print_after_newline "print_with_newline"
 laravel --version
