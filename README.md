@@ -19,9 +19,5 @@ cd ~ && mkdir 'Documents.nosync' && mkdir Documents.nosync/Projects && mkdir Doc
 ***
 
 to check after install:
-ccat with regular cat
-thefuck
-autocomplete
-autosuggest
-zsh-syntax
-qr (img in terminal + output to svg)
+snazzy theme ook installeren voor iterm2 + terminal (zodat kleuren ook werken indien niet in hyper)
+color syntax highlighting for vi/vim
