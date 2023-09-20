@@ -34,6 +34,9 @@ brew install thefuck
 brew install chroma
 brew install ccat
 
+
+print_after_newline "print_with_newline"
+
 # write settings to .zshrc
 
 
