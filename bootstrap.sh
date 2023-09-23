@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/sh
 
 echo "Loading utils..."
 source "./resources/utils.sh"
@@ -17,7 +17,8 @@ run_script "Setting ssh key for github..." "./steps/setup_github_ssh_key.sh"
 run_script "Installing HomeBrew..." "./steps/install_homebrew.sh"
 
 # Install tools and applications specified in the brewfile.
-run_script "Installing tools + apps..." "brew bundle --file ./resources/brewfile"
+run_command "Installing tools + apps..." "brew bundle --file ./resources/brewfile"
+print_after_newline "print_with_newline"
 
 # Install Xdebug for PHP debugging.
 run_script "Installing Xdebug..." "./steps/install_xdebug.sh"

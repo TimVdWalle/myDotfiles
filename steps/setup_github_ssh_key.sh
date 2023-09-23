@@ -1,9 +1,6 @@
 #!/bin/sh
 
-
-ask_for_confirmation "Do you want to setup a new ssh key for github?"
-if answer_is_yes; then
-    print_after_newline "print_with_newline"
+if [ ! -f ~/.ssh/id_ed25519 ]; then
     echo "Generating ssh key for github"
 
     echo "Please enter your email"
@@ -29,8 +26,7 @@ if answer_is_yes; then
     echo "Press enter to continue..."
     read waiting
 else
-    print_after_newline "print_with_newline"
-    echo "Skipping creation of ssh key for github"
+    echo "SSH key already exists for GitHub"
 fi;
 
 print_after_newline "print_with_newline"

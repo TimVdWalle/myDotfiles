@@ -8,11 +8,12 @@ check_os() {
 }
 
 confirm_install(){
-  ask_for_confirmation "This script will set up your Mac. Continue? (y/n)"
+  ask_for_confirmation "This script will set up your Mac. Continue?"
   if answer_is_no; then
       exit 1
   else
     log "Setting up your Mac..."
+    print_after_newline "print_with_newline"
   fi
 }
 
@@ -28,6 +29,13 @@ run_script() {
     local script_path="$2"
     log "$message"
     source "$script_path"
+}
+
+run_command() {
+    local message="$1"
+    local cmd="$2"
+    log "$message"
+    eval "$cmd"
 }
 
 answer_is_yes() {

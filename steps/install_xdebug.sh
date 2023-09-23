@@ -1,7 +1,7 @@
 #!/bin/sh
 
-ask_for_confirmation "Do you want to setup xdebug?"
-if answer_is_yes; then
+# Check if xdebug is installed
+if ! pecl list | grep -q xdebug; then
   brew install php
   pecl install xdebug
 
@@ -10,16 +10,8 @@ if answer_is_yes; then
   echo "See documentation on : https://herd.laravel.com/docs/1/advanced-usage/xdebug"
   echo "Press enter to continue"
   read waiting
-
-  print_after_newline "print_with_newline"
 else
-    print_after_newline "print_with_newline"
-    echo "Skipping xdebug setup"
+    echo "Xdebug is already installed"
 fi;
 
 print_after_newline "print_with_newline"
-
-
-
-
-

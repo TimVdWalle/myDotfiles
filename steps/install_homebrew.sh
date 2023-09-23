@@ -17,10 +17,3 @@ brew upgrade
 brew tap homebrew/bundle
 
 print_after_newline "print_with_newline"
-
-
-#if ! command -v brew &> /dev/null; then
-#    run_script "Installing HomeBrew..." "./resources/install_homebrew.sh"
-#else
-#    log "Homebrew already installed. Skipping..."
-#fi

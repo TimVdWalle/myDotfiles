@@ -8,3 +8,5 @@
 ## Sites
 #git clone git@github.com:blade-ui-kit/blade-ui-kit.com.git $SITES/blade-ui-kit.com
 #git clone git@github.com:laravel/blog.laravel.com.git $SITES/blog.laravel.com
+
+print_after_newline "print_with_newline"
