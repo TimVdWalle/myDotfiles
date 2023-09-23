@@ -18,6 +18,7 @@ run_script "Installing HomeBrew..." "./steps/install_homebrew.sh"
 
 # Install tools and applications specified in the brewfile.
 run_command "Installing tools + apps..." "brew bundle --file ./resources/brewfile"
+echo "Tools + apps are installed."
 print_after_newline "print_with_newline"
 
 # Install Xdebug for PHP debugging.
@@ -33,7 +34,7 @@ run_script "Cloning my other repositories to local..." "./steps/clone_github_rep
 run_script "Installing zsh etc..." "./steps/setup_shell.sh"
 
 # Create symbolic links for specified folders.
-run_script "Creating symlinks..." "./steps/create_folder_symlinks.sh"
+run_script "Creating symlinks..." "./steps/symlink_folders.sh"
 
 # Load macOS-specific settings/preferences.
 run_script "Loading macos settings..." "./steps/load_macos_preferences.sh"
