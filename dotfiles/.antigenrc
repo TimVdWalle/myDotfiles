@@ -5,10 +5,10 @@ antigen use oh-my-zsh
 antigen bundle git
 
 # use custom plugin
-antigen bundle zsh-users/zsh-syntax-highlighting
+#antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle z-shell/F-Sy-H --branch=main
 antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-autocomplete
+#antigen bundle zsh-users/zsh-autocomplete
 antigen bundle qrcode
 
 # load the theme
