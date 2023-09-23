@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-echo "Loading helper files..."
+echo "Loading utils..."
 source "./resources/utils.sh"
 source "./resources/utils-macos.sh"
 
@@ -41,4 +41,4 @@ run_script "Loading macos settings..." "./resources/load_macos_preferences.sh"
 run_script "Symlinking dotfiles..." "./resources/symlink_dotfiles.sh"
 
 # Display installation summary or overview.
-run_script "Showing installation overview..." "./resources/overview.sh"
+run_script "Showing installation overview..." "./resources/show_overview.sh"
