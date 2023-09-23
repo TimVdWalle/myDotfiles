@@ -1,55 +1,44 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-echo "Setting up your Mac..."
+echo "Loading helper files..."
+source "./resources/utils.sh"
+source "./resources/utils-macos.sh"
 
-# Loading helper functions
-echo "Loading helper functions..."
-source ./resources/utils.sh
-source ./resources/utils-macos.sh
+# Check os
+check_os
 
-# Setting ssh key (for github)
-echo "Setting ssh key for github..."
-source ./resources/setup_github_ssh_key.sh
+# Confirm user intent before proceeding.
+confirm_install
 
-# Installing HomeBrew
-echo "Installing HomeBrew..."
-source ./resources/install_homebrew.sh
+# Set SSH key for GitHub integration.
+run_script "Setting ssh key for github..." "./resources/setup_github_ssh_key.sh"
 
-# Installing tools + apps
-echo "Installing tools + apps..."
-brew bundle --file ./resources/brewfile
-print_after_newline "print_with_newline"
+# Install HomeBrew
+run_script "Installing HomeBrew..." "./resources/install_homebrew.sh"
 
-# Installing Xdebug
-echo "Installing Xdebug..."
-source ./resources/install_xdebug.sh
+# Install tools and applications specified in the brewfile.
+run_script "Installing tools + apps..." "brew bundle --file ./resources/brewfile"
 
-# Linking local dotfiles folder with github
-echo "Linking local dotfiles folder with github..."
-source ./resources/link_github.sh
+# Install Xdebug for PHP debugging.
+run_script "Installing Xdebug..." "./resources/install_xdebug.sh"
 
-# Cloning my other repositories to local
-echo "Cloning my other repositories to local..."
-source ./resources/clone_github_repositories.sh
+# Link local dotfiles folder to GitHub.
+run_script "Linking local dotfiles folder with github..." "./resources/link_github.sh"
 
-# Installing zsh etc
-echo "Installing zsh etc..."
-source ./resources/setup_shell.sh
+# Clone other required repositories.
+run_script "Cloning my other repositories to local..." "./resources/clone_github_repositories.sh"
 
-# Creating symlinks (folders etc, no dotfiles)
-echo "Creating symlinks..."
-source ./resources/create_folder_symlinks.sh
+# Set up the shell environment.
+run_script "Installing zsh etc..." "./resources/setup_shell.sh"
 
-# Loading macos settings
-echo "Loading macos settings..."
-source ./resources/load_macos_preferences.sh
+# Create symbolic links for specified folders.
+run_script "Creating symlinks..." "./resources/create_folder_symlinks.sh"
 
-# Symlinking dotfiles
-echo "Symlinking dotfiles..."
-source ./resources/symlink_dotfiles.sh
+# Load macOS-specific settings/preferences.
+run_script "Loading macos settings..." "./resources/load_macos_preferences.sh"
 
+# Create symbolic links for dotfiles.
+run_script "Symlinking dotfiles..." "./resources/symlink_dotfiles.sh"
 
-
-# Showing installation overview
-echo "Showing installation overview..."
-source ./resources/overview.sh
+# Display installation summary or overview.
+run_script "Showing installation overview..." "./resources/overview.sh"

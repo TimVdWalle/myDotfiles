@@ -1,26 +1,43 @@
 #!/usr/bin/env bash
 
-show_header() {
-	clear
+check_os() {
+  if [[ "$(uname)" != "Darwin" ]]; then
+      echo "This script is intended for MacOS only!"
+      exit 1
+  fi
+}
 
-	COLUMNS=$(tput cols)
-	SPACES_TO_CENTER=$(printf "%*s\n" $((($COLUMNS-97)/2)))
-	YELLOW_BLACK="\033[48;5;220m\033[38;5;0m"
-	echo -e "$YELLOW_BLACK$SPACES_TO_CENTER                                                                                                 $SPACES_TO_CENTER "
-	echo -e "$YELLOW_BLACK$SPACES_TO_CENTER                                                                                                 $SPACES_TO_CENTER "
-	echo -e "$YELLOW_BLACK$SPACES_TO_CENTER ██████╗  ██████╗  ██████╗ ████████╗███████╗████████╗██████╗  █████╗ ██████╗    ███████╗██╗  ██╗ $SPACES_TO_CENTER "
-	echo -e "$YELLOW_BLACK$SPACES_TO_CENTER ██╔══██╗██╔═══██╗██╔═══██╗╚══██╔══╝██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗   ██╔════╝██║  ██║ $SPACES_TO_CENTER "
-	echo -e "$YELLOW_BLACK$SPACES_TO_CENTER ██████╔╝██║   ██║██║   ██║   ██║   ███████╗   ██║   ██████╔╝███████║██████╔╝   ███████╗███████║ $SPACES_TO_CENTER "
-	echo -e "$YELLOW_BLACK$SPACES_TO_CENTER ██╔══██╗██║   ██║██║   ██║   ██║   ╚════██║   ██║   ██╔══██╗██╔══██║██╔═══╝    ╚════██║██╔══██║ $SPACES_TO_CENTER "
-	echo -e "$YELLOW_BLACK$SPACES_TO_CENTER ██████╔╝╚██████╔╝╚██████╔╝   ██║   ███████║   ██║   ██║  ██║██║  ██║██║     ██╗███████║██║  ██║ $SPACES_TO_CENTER "
-	echo -e "$YELLOW_BLACK$SPACES_TO_CENTER ╚═════╝  ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝ $SPACES_TO_CENTER "
-	echo -e "$YELLOW_BLACK$SPACES_TO_CENTER                                                                                                 $SPACES_TO_CENTER \033[0m"
+confirm_install(){
+  ask_for_confirmation "This script will set up your Mac. Continue? (y/n)"
+  if answer_is_no; then
+      exit 1
+  else
+    log "Setting up your Mac..."
+  fi
+}
 
-    print_with_newline
+log() {
+    # Logging function to timestamp each action.
+    #echo "[$(date +%Y-%m-%d\ %H:%M:%S)] $1"
+    echo "$1"
+}
+
+run_script() {
+    # Helper function to display a message and then run a script.
+    local message="$1"
+    local script_path="$2"
+    log "$message"
+    source "$script_path"
 }
 
 answer_is_yes() {
     [[ "$REPLY" =~ ^[Yy]$ ]] \
+        && return 0 \
+        || return 1
+}
+
+answer_is_no() {
+    [[ "$REPLY" =~ ^[Nn]$ ]] \
         && return 0 \
         || return 1
 }
