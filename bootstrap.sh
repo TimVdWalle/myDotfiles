@@ -42,5 +42,8 @@ run_script "Loading macos settings..." "./steps/load_macos_preferences.sh"
 # Create symbolic links for dotfiles.
 run_script "Symlinking dotfiles..." "./steps/symlink_dotfiles.sh"
 
+# Install snazzy theme.
+run_script "Installing snazzy theme ..." "./steps/install_shell_theme.sh"
+
 # Display installation summary or overview.
 run_script "Showing installation overview:" "./steps/show_overview.sh"

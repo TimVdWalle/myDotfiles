@@ -21,13 +21,6 @@ source "./resources/install_fonts.sh"
 # Install the pure prompt : https://github.com/sindresorhus/pure
 brew install pure
 
-# Install the color scheme that goes beautifully with the pure prompt
-# installing hyper theme before hyper was opened for the first time makes it crash
-echo "Open hyper terminal app, and close it again"
-echo "Press enter to continue..."
-read waiting
-hyper install hyper-snazzy
-
 # install antigen : Antigen is a small set of functions that help you easily manage your shell (zsh) plugins, called bundles
 brew install antigen
 brew install thefuck
