@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 check_os() {
   if [[ "$(uname)" != "Darwin" ]]; then

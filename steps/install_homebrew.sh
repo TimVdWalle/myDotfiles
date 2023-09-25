@@ -3,7 +3,7 @@
 # Check for Homebrew and install if we don't have it
 if test ! $(which brew); then
   echo "HomeBrew not installed yet. Installing..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   echo 'eval "$(/usr/local/bin/brew shellenv)"' >> $HOME/.zprofile
   eval "$(/usr/local/bin/brew shellenv)"
