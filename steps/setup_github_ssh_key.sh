@@ -1,9 +1,9 @@
 #!/bin/sh
 
 if [ ! -f ~/.ssh/id_ed25519 ]; then
-    echo "Generating ssh key for github"
+    echo "Generating ssh key for github..."
 
-    echo "Please enter your email"
+    echo "Please enter your email:"
     read email
     echo "SSH key will be created with label: $email"
 
