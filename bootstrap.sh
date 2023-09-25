@@ -28,7 +28,7 @@ run_script "Installing Xdebug..." "./steps/install_xdebug.sh"
 run_script "Linking local dotfiles folder with github..." "./steps/link_github.sh"
 
 # Clone other repositories.
-#run_script "Cloning my other repositories to local..." "./steps/clone_github_repositories.sh"
+run_script "Cloning my repositories to local..." "./steps/clone_github_repositories.sh"
 
 # Set up the shell environment.
 run_script "Installing zsh etc..." "./steps/setup_shell.sh"

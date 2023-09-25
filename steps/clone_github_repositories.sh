@@ -1,12 +1,17 @@
 #!/bin/sh
 
-#CODE=$HOME/Code
-#SITES=$HOME/Herd
-#BLADE=$CODE/blade-ui-kit
-#LARAVEL=$CODE/laravel
+LARAVEL=~/Projects/Laravel/
 
-## Sites
-#git clone git@github.com:blade-ui-kit/blade-ui-kit.com.git $SITES/blade-ui-kit.com
-#git clone git@github.com:laravel/blog.laravel.com.git $SITES/blog.laravel.com
+if [ ! -e $LARAVEL ]; then
+  mkdir $LARAVEL
+
+  git clone git@github.com:TimVdWalle/perfume-picker.git $LARAVEL/perfume-picker
+  #git clone git@github.com:laravel/blog.laravel.com.git $SITES/blog.laravel.com
+
+  echo "GitHub repositories cloned to local."
+else
+  echo "GitHub repositories already cloned to local."
+  echo "Skipping."
+fi
 
 print_after_newline "print_with_newline"
