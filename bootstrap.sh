@@ -28,7 +28,7 @@ run_script "Installing Xdebug..." "./steps/install_xdebug.sh"
 run_script "Linking local dotfiles folder with github..." "./steps/link_github.sh"
 
 # Clone other repositories.
-run_script "Cloning my other repositories to local..." "./steps/clone_github_repositories.sh"
+#run_script "Cloning my other repositories to local..." "./steps/clone_github_repositories.sh"
 
 # Set up the shell environment.
 run_script "Installing zsh etc..." "./steps/setup_shell.sh"
@@ -43,4 +43,4 @@ run_script "Loading macos settings..." "./steps/load_macos_preferences.sh"
 run_script "Symlinking dotfiles..." "./steps/symlink_dotfiles.sh"
 
 # Display installation summary or overview.
-run_script "Showing installation overview..." "./steps/show_overview.sh"
+run_script "Showing installation overview:" "./steps/show_overview.sh"

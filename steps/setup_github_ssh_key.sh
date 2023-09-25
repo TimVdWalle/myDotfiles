@@ -26,7 +26,8 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
     echo "Press enter to continue..."
     read waiting
 else
-    echo "SSH key already exists for GitHub"
+    echo "SSH key already exists for GitHub."
+    echo "Skipping."
 fi;
 
 print_after_newline "print_with_newline"

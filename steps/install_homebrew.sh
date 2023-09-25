@@ -8,6 +8,7 @@ if test ! $(which brew); then
   eval "$(/usr/local/bin/brew shellenv)"
 else
   echo 'HomeBrew already installed.'
+  echo 'Skipping.'
 fi
 
 # Update Homebrew recipes

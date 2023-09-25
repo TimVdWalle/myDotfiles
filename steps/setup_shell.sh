@@ -8,9 +8,11 @@ if ! brew list zsh > /dev/null 2>&1; then
     brew install zsh
 fi
 
-# Check for Oh My Zsh and install if we don't have it
-if test ! $(which omz); then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if [ -d ~/.oh-my-zsh ]; then
+	echo "oh-my-zsh is already installed. Skipping."
+ else
+ 	echo "Installing oh-my-zsh"
+ 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 brew tap homebrew/cask-fonts

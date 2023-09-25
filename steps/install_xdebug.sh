@@ -11,7 +11,8 @@ if ! pecl list | grep -q xdebug; then
   echo "Press enter to continue"
   read waiting
 else
-    echo "Xdebug is already installed"
+    echo "Xdebug is already installed."
+    echo "Skipping."
 fi;
 
 print_after_newline "print_with_newline"

@@ -10,4 +10,6 @@ defaults write com.apple.spaces "spans-displays" -bool "false" && killall System
 # Show hidden files:
 defaults write com.apple.finder AppleShowAllFiles YES;
 
+echo "MacOS settings preferences are loaded."
+
 print_after_newline "print_with_newline"
