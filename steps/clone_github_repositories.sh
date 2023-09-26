@@ -6,7 +6,8 @@ if [ ! -e $LARAVEL ]; then
   mkdir $LARAVEL
 
   git clone git@github.com:TimVdWalle/perfume-picker.git $LARAVEL/perfume-picker
-  #git clone git@github.com:laravel/blog.laravel.com.git $SITES/blog.laravel.com
+  git clone git@github.com:TimVdWalle/dart-score.git $LARAVEL/dart-score
+  git clone git@github.com:TimVdWalle/text2playlist.git $LARAVEL/text2playlist
 
   echo "GitHub repositories cloned to local."
 else
