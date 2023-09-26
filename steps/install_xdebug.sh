@@ -4,7 +4,7 @@
 ARCHITECTURE=$(uname -m)
 
 # Check if xdebug is installed
-if ! php -m | grep -q xdebug; then
+if ! pecl list | grep -q xdebug; then
   # Check architecture and execute appropriate commands
   if [ "$ARCHITECTURE" = "x86_64" ]; then
     # Commands for Intel
