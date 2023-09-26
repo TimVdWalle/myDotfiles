@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# https://docs.devsense.com/en/vscode/debug/xdebug-mac
 ARCHITECTURE=$(uname -m)
 
 # Check if xdebug is installed
@@ -15,7 +16,7 @@ if ! php -m | grep -q xdebug; then
     echo "Detected M1/M2/Mx architecture. Running M1/M2/Mx-specific commands."
     # Currently, the same commands as for Intel are used. Adjust if necessary.
     brew install php
-    pecl install xdebug
+    arch -arm64 sudo pecl install xdebug
   else
     echo "Unknown architecture detected."
     brew install php
