@@ -1,5 +1,8 @@
 #!/bin/sh
 
+
+cd ~/Projects/scripts/myDotfiles
+
 # Check if git is initialized in the current directory
 if ! git rev-parse --is-inside-work-tree &> /dev/null; then
     echo "Not a git repository. Initializing..."
