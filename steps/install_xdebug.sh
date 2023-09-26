@@ -21,6 +21,8 @@ if ! php -m | grep -q xdebug; then
     echo "Unknown architecture detected."
     brew install php
     pecl install xdebug
+    # maybe this works here ? :
+    # arch -x86_64 sudo pecl install xdebug   # https://xdebug.org/docs/install
   fi
 
   echo "Xdebug setup needs brew install php as long as xdebug is not included in herd"
