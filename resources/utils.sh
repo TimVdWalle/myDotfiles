@@ -9,7 +9,7 @@ check_os() {
 
 confirm_install(){
   ask_for_confirmation "This script will set up your Mac. Continue?"
-  if answer_is_no; then
+  if ! answer_is_yes; then
       exit 1
   else
     log "Setting up your Mac..."
