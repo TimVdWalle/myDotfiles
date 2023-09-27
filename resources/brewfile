@@ -14,7 +14,7 @@ brew 'git'
 brew 'node'
 
 # System
-brew 'mackup'
+#brew 'mackup'
 
 # Apps
 cask 'arduino-ide'
