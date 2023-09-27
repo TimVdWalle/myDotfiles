@@ -7,7 +7,7 @@ dotfiles_dir=~/Projects/scripts/myDotfiles/dotfiles/
 home_dir=~
 
 # List of dotfiles to potentially symlink
-list_of_dotfiles=".hyper.js .zprofile .zshrc .antigenrc"
+list_of_dotfiles=".hyper.js .zprofile .zshrc .antigenrc .config/starship.toml"
 
 # Loop through each file and create a symlink only if the file exists in the dotfiles directory
 for file in $list_of_dotfiles; do

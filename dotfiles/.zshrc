@@ -110,21 +110,30 @@ source $ZSH/oh-my-zsh.sh
 #   Setup for pure prompt
 #
 #############################################
-autoload -U promptinit; promptinit
+#autoload -U promptinit; promptinit
 
 # optionally define some options
-PURE_CMD_MAX_EXEC_TIME=10
+#PURE_CMD_MAX_EXEC_TIME=10
 
 # change the path color
 #zstyle :prompt:pure:path color white
 
 # change the color for both `prompt:success` and `prompt:error`
-zstyle ':prompt:pure:prompt:success' color blue
+#zstyle ':prompt:pure:prompt:success' color blue
 
 # turn on git stash status
-zstyle :prompt:pure:git:stash show yes
+#zstyle :prompt:pure:git:stash show yes
 
-prompt pure
+#prompt pure
+
+
+#############################################
+#
+#   starship / pure prompt
+#
+#############################################
+eval "$(starship init zsh)"
+#SPACESHIP_DIR_TRUNC_REPO=false
 
 
 #############################################
