@@ -16,6 +16,6 @@ fi
 brew update
 brew upgrade
 
-brew tap homebrew/bundle
+#brew tap homebrew/bundle
 
 print_after_newline "print_with_newline"
