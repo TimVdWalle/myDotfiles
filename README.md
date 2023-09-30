@@ -31,3 +31,4 @@ xdebug.mode=debug
 + Dual screen setup
 + Install snazzy theme also for iterm2 + terminal
 + To check: color syntax highlighting for vi/vim
++ Check if ZWSP is correct in starship pure prompt : does it show <200b> or correct ZWSP ?
