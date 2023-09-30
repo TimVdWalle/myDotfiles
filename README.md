@@ -1,43 +1,33 @@
-***
-chmod +x bootstrap.sh
-
-***
-./bootstrap.sh
 # myDotfiles
 
-***
-How to install:
-***
+
+## How to install
 cd ~ && mkdir 'Documents.nosync' && mkdir Documents.nosync/Projects && mkdir Documents.nosync/Projects/scripts && mkdir Documents.nosync/Projects/scripts/myDotfiles && cd Documents.nosync/Projects/scripts/myDotfiles && curl -#L https://github.com/TimVdWalle/myDotfiles/archive/master.zip | tar -xzv --strip-components 1 && chmod +x bootstrap.sh && ./bootstrap.sh
 
 
+## To do's during install
 
-***
+### After installation of ohmyzsh
++ Type exit to make the install script continue
 
-***
+### Logi options
++ Open app
++ Login to my account
++ Restore backup
 
-***
-
-to check after install:
-snazzy theme ook installeren voor iterm2 + terminal (zodat kleuren ook werken indien niet in hyper)
-color syntax highlighting for vi/vim
-
-***
-
-logioptions:
-login in my account ('more' button / 'meer' button, and restore backup)
-
-after installation of ohmyzsh:
-type exit to make install script continue
-
-start herd: open php.ini
-add this to php.ini (for intel):
-# Absolute path to the xdebug.so file
-zend_extension=/usr/local/lib/php/pecl/20220829/xdebug.so
-
-# Enable Xdebug
+### Herd setup
++ Open Herd
++ Use Herd UI to open php.ini
++ Add this to php.ini: (for intel)
+ 
+`#` Absolute path to the xdebug.so file  
+zend_extension=/usr/local/lib/php/pecl/20220829/xdebug.so  
+`#` Enable Xdebug  
 xdebug.mode=debug
 
 
-
-drag Projects folder into finder ; from Documents.nosync folder
+## Todo's after install
++ Drag projects folder into finder favourites from the Documents.nosync
++ Dual screen setup
++ Install snazzy theme also for iterm2 + terminal
++ To check: color syntax highlighting for vi/vim
