@@ -174,3 +174,11 @@ alias h="history"
 alias cat="ccat"
 alias grep='grep --color=auto '
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
+# Herd injected PHP binary.
+export PATH="/Users/timvandewalle/Library/Application Support/Herd/bin/":$PATH
+
+
+# Herd injected PHP 8.2 configuration.
+export HERD_PHP_82_INI_SCAN_DIR="/Users/timvandewalle/Library/Application Support/Herd/config/php/82/"
+export PATH="$PATH:."
