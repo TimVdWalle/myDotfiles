@@ -33,3 +33,6 @@ cask 'visual-studio-code'
 # Mac App Store
 brew 'mas'                              # Mac App Store manager
 mas "ColorSlurp", id: 1287239339
+
+# raycast
+cask 'raycast'
