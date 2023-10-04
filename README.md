@@ -1,3 +1,4 @@
+@@ -0,0 +1,36 @@
 # myDotfiles
 
 
@@ -19,7 +20,7 @@ cd ~ && mkdir 'Documents.nosync' && mkdir Documents.nosync/Projects && mkdir Doc
 + Open Herd
 + Use Herd UI to open php.ini
 + Add this to php.ini: (for intel)
- 
+
 `#` Absolute path to the xdebug.so file  
 zend_extension=/usr/local/lib/php/pecl/20220829/xdebug.so  
 `#` Enable Xdebug  
@@ -31,4 +32,9 @@ xdebug.mode=debug
 + Dual screen setup
 + Install snazzy theme also for iterm2 + terminal
 + To check: color syntax highlighting for vi/vim
-+ Check if ZWSP is correct in starship pure prompt : does it show <200b> or correct ZWSP ?
++ Check if ZWSP is correct in starship pure prompt : does it show <200b> or correct ZWSP ?  
+  ( ~/.config/starship.toml )
++ Start raycast and finnish setup
+  No newline at end of file
+
++ Open fork; drag myDotofiles folder into it; discard all changes; checkout master branch from origin; fetch and pull
