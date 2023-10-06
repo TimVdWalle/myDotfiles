@@ -30,6 +30,7 @@ xdebug.mode=debug
 + Drag projects folder into finder favourites from the Documents.nosync
 + Dual screen setup
 + Install snazzy theme also for iterm2 + terminal
+  (https://github.com/sindresorhus/iterm2-snazzy)
 + To check: color syntax highlighting for vi/vim
 + Check if ZWSP is correct in starship pure prompt : does it show <200b> or correct ZWSP ?  
   ( ~/.config/starship.toml )
