@@ -1,4 +1,3 @@
-@@ -0,0 +1,36 @@
 # myDotfiles
 
 
@@ -35,6 +34,5 @@ xdebug.mode=debug
 + Check if ZWSP is correct in starship pure prompt : does it show <200b> or correct ZWSP ?  
   ( ~/.config/starship.toml )
 + Start raycast and finnish setup
-  No newline at end of file
 
-+ Open fork; drag myDotofiles folder into it; discard all changes; checkout master branch from origin; fetch and pull
++ Open fork; drag myDotfiles folder into it; discard all changes; checkout master branch from origin; fetch and pull
