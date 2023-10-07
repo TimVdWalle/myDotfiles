@@ -39,3 +39,4 @@ xdebug.mode=debug
 + Start raycast and finnish setup
 
 + Open fork; drag myDotfiles folder into it; discard all changes; checkout master branch from origin; fetch and pull
++ When Laravel folder is empty: delete laravel folder and run script again
