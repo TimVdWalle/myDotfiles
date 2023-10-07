@@ -25,6 +25,8 @@ zend_extension=/usr/local/lib/php/pecl/20220829/xdebug.so
 `#` Enable Xdebug  
 xdebug.mode=debug
 
++ configure Herd for the correct folder containing the sites (after script is done with install)
+
 
 ## Todo's after install
 + Drag projects folder into finder favourites from the Documents.nosync
