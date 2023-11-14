@@ -1,13 +1,21 @@
 #!/bin/sh
 
 LARAVEL=~/Projects/Laravel/
+OTHER=~/Projects/Other/
 
 if [ ! -e $LARAVEL ]; then
   mkdir $LARAVEL
+  mkdir $OTHER
 
   git clone git@github.com:TimVdWalle/perfume-picker.git $LARAVEL/perfume-picker
   git clone git@github.com:TimVdWalle/dart-score.git $LARAVEL/dart-score
   git clone git@github.com:TimVdWalle/text2playlist.git $LARAVEL/text2playlist
+
+  git clone git@github.com:TimVdWalle/commit-verbs.git $OTHER/commit-verbs
+
+  # setup git hook script(s)
+  chmod +x $OTHER/commit-verbs/git-templates/hooks/prepare-commit-msg
+  git config --global init.templateDir $OTHER/commit-verbs/git-templates
 
   echo "GitHub repositories cloned to local."
 else
