@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # add herd binaries to path
-export PATH="$PATH:$HOME/Library/Application Support/Herd/bin/"
+#export PATH="$PATH:$HOME/Library/Application Support/Herd/bin/"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -176,9 +176,10 @@ alias grep='grep --color=auto '
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
 # Herd injected PHP binary.
-export PATH="/Users/timvandewalle/Library/Application Support/Herd/bin/":$PATH
+#export PATH="/Users/timvandewalle/Library/Application Support/Herd/bin/":$PATH
+export PATH=$PATH:$HOME/.composer/vendor/bin
 
 
 # Herd injected PHP 8.2 configuration.
-export HERD_PHP_82_INI_SCAN_DIR="/Users/timvandewalle/Library/Application Support/Herd/config/php/82/"
+#export HERD_PHP_82_INI_SCAN_DIR="/Users/timvandewalle/Library/Application Support/Herd/config/php/82/"
 export PATH="$PATH:."

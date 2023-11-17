@@ -21,6 +21,11 @@ run_script "Installing HomeBrew..." "./steps/install_homebrew.sh"
 
 # Install tools and applications specified in the brewfile.
 run_command "Installing tools + apps..." "brew bundle --file ./resources/brewfile"
+composer global require laravel/valet
+composer global require laravel/installer
+valet install
+#brew install --cask phpmon
+
 echo "Tools + apps are installed."
 print_after_newline "print_with_newline"
 

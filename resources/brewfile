@@ -1,13 +1,14 @@
 tap 'homebrew/cask-fonts'
 #tap 'homebrew/cask-versions'
 tap 'homebrew/bundle'
+tap 'nicoverbruggen/homebrew-cask'
 
 # These need to be installed first
 cask 'logitech-options'
-cask 'herd'
+#cask 'herd'
 
 # Dev
-#brew 'composer'    # Not needed when installing herd (herd = php, composer, laravel)
+brew 'composer'    # Not needed when installing herd (herd = php, composer, laravel)
 brew 'coreutils'    # Those that come with macOS are outdated
 brew 'git'
 #brew 'httpie'
@@ -29,6 +30,7 @@ cask 'spotify'
 cask 'steam'
 cask 'tableplus'
 cask 'visual-studio-code'
+cask 'phpmon'
 
 # Mac App Store
 brew 'mas'                              # Mac App Store manager
