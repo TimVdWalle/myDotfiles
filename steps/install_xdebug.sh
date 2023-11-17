@@ -25,11 +25,11 @@ if ! /usr/local/bin/pecl list | grep -q xdebug; then
     # arch -x86_64 sudo pecl install xdebug   # https://xdebug.org/docs/install
   fi
 
-  echo "Xdebug setup needs brew install php as long as xdebug is not included in herd"
-  echo "Update php.ini: find correct location of php.ini in Herd UI"
-  echo "See documentation on : https://herd.laravel.com/docs/1/advanced-usage/xdebug"
-  echo "Press enter to continue"
-  read waiting
+  #echo "Xdebug setup needs brew install php as long as xdebug is not included in herd"
+  #echo "Update php.ini: find correct location of php.ini in Herd UI"
+  #echo "See documentation on : https://herd.laravel.com/docs/1/advanced-usage/xdebug"
+  #echo "Press enter to continue"
+  #read waiting
 else
     echo "Xdebug is already installed."
     echo "Skipping."
