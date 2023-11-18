@@ -16,11 +16,11 @@ run_script "Creating symlinks..." "./steps/symlink_folders.sh"
 # Set SSH key for GitHub integration.
 run_script "Setting ssh key for github..." "./steps/setup_github_ssh_key.sh"
 
-# Link local dotfiles folder to GitHub.
-run_script "Linking local dotfiles folder with github..." "./steps/link_github.sh"
-
 # Install HomeBrew
 run_script "Installing HomeBrew..." "./steps/install_homebrew.sh"
+
+# Link local dotfiles folder to GitHub.
+run_script "Linking local dotfiles folder with github..." "./steps/link_github.sh"
 
 # Install tools and applications specified in the brewfile.
 run_command "Installing tools + apps..." "brew bundle --file ./resources/brewfile"
