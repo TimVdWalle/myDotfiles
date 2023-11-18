@@ -37,6 +37,7 @@ xdebug.mode=debug
 + Check if ZWSP is correct in starship pure prompt : does it show <200b> or correct ZWSP ?  
   ( ~/.config/starship.toml )
 + Start raycast and finnish setup
++ Do git init in every project where automatic conversion to emoji commit messages is wanted 
 
 + Open fork; drag myDotfiles folder into it; discard all changes; checkout master branch from origin; fetch and pull
 + When Laravel folder is empty: delete laravel folder and run script again

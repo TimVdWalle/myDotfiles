@@ -10,8 +10,8 @@ if [ ! -e $LARAVEL ]; then
   mkdir JS
 
   git clone git@github.com:TimVdWalle/perfume-picker.git $LARAVEL/perfume-picker
-  git clone git@github.com:TimVdWalle/dart-score.git $LARAVEL/dart-score
   git clone git@github.com:TimVdWalle/text2playlist.git $LARAVEL/text2playlist
+  git clone git@github.com:TimVdWalle/dart-score.git $LARAVEL/dart-score
 
   git clone git@github.com:TimVdWalle/commit-verbs.git $OTHER/commit-verbs
 

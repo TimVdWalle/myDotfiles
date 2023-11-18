@@ -1,6 +1,6 @@
 #!/bin/sh
 
-
+brew install git
 cd ~/Projects/scripts/myDotfiles
 
 # Check if git is initialized in the current directory
@@ -18,6 +18,7 @@ if git remote -v | grep -q "origin"; then
 else
     echo "Setting origin..."
     git remote add origin git@github.com:TimVdWalle/myDotfiles.git
+    git init
 fi
 
 print_after_newline "print_with_newline"
