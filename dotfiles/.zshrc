@@ -176,7 +176,7 @@ alias cat="ccat"
 alias grep='grep --color=auto '
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 alias pa='php artisan'
-lias vizshrc='vi ~/.zshrc'
+alias vizshrc='vi ~/.zshrc'
 
 # Herd injected PHP binary.
 #export PATH="/Users/timvandewalle/Library/Application Support/Herd/bin/":$PATH
