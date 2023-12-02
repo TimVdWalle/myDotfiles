@@ -22,6 +22,9 @@ cask 'visual-studio-code'
 cask 'arduino-ide'
 cask 'steam'
 cask 'tableplus'
+#cask 'commander-one'
+
+brew 'python3'
 
 # Mac App Store
 brew 'mas'                              # Mac App Store manager
