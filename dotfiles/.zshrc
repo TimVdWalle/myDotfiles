@@ -186,3 +186,13 @@ export PATH=$PATH:$HOME/.composer/vendor/bin
 # Herd injected PHP 8.2 configuration.
 #export HERD_PHP_82_INI_SCAN_DIR="/Users/timvandewalle/Library/Application Support/Herd/config/php/82/"
 export PATH="$PATH:."
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export PATH="/usr/local/opt/ruby/bin:$PATH"
+#export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+
+
+. /usr/local/opt/asdf/libexec/asdf.sh
