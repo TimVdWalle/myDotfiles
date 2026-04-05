@@ -7,11 +7,13 @@ tap 'nicoverbruggen/homebrew-cask'
 brew 'coreutils'    # Those that come with macOS are outdated
 brew 'node'
 
+# brew 'zsh-syntax-highlighting'
+
 cask 'logitech-options'
 cask 'fork'
 cask 'hyper'
 brew 'composer'    # Not needed when installing herd (herd = php, composer, laravel)
-cask 'phpstorm'
+# cask 'phpstorm'
 cask 'phpmon'
 cask 'dbngin'
 cask 'sequel-ace'
@@ -22,7 +24,12 @@ cask 'visual-studio-code'
 cask 'arduino-ide'
 cask 'steam'
 cask 'tableplus'
+cask 'pycharm-ce'
+cask 'dbeaver-community'
 #cask 'commander-one'
+
+cask 'docker'
+cask 'docker-desktop'
 
 brew 'python3'
 
@@ -31,4 +38,4 @@ brew 'mas'                              # Mac App Store manager
 mas "ColorSlurp", id: 1287239339
 
 # raycast
-cask 'raycast'
+#cask 'raycast'

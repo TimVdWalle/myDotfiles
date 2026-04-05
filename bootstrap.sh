@@ -24,10 +24,6 @@ run_script "Linking local dotfiles folder with github..." "./steps/link_github.s
 
 # Install tools and applications specified in the brewfile.
 run_command "Installing tools + apps..." "brew bundle --file ./resources/brewfile"
-composer global require laravel/valet
-composer global require laravel/installer
-valet install
-#brew install --cask phpmon
 
 echo "Tools + apps are installed."
 print_after_newline "print_with_newline"
@@ -46,7 +42,7 @@ run_script "Installing zsh etc..." "./steps/setup_shell.sh"
 run_script "Loading macos settings..." "./steps/load_macos_preferences.sh"
 
 # Create symbolic links for dotfiles.
-run_script "Symlinking dotfiles..." "./steps/symlink_dotfiles.sh"
+#run_script "Symlinking dotfiles..." "./steps/symlink_dotfiles.sh"
 
 # Install snazzy theme.
 run_script "Installing snazzy theme ..." "./steps/install_shell_theme.sh"

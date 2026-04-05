@@ -3,8 +3,8 @@
 #export PATH="$PATH:$HOME/Library/Application Support/Herd/bin/"
 php --version
 print_after_newline "print_with_newline"
-laravel --version
-print_after_newline "print_with_newline"
+#laravel --version
+#print_after_newline "print_with_newline"
 composer --version
 print_after_newline "print_with_newline"
 echo $SHELL

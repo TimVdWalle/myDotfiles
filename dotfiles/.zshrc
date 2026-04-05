@@ -1,8 +1,18 @@
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # add herd binaries to path
 #export PATH="$PATH:$HOME/Library/Application Support/Herd/bin/"
+
+
+# export NVM_DIR="$HOME/.nvm"
+#   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+#   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+
+export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -76,6 +86,8 @@ ZSH_COLORIZE_TOOL=chroma
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+#. $(brew --prefix asdf)/libexec/asdf.sh
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -103,6 +115,13 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+
+##########
+# ruby
+##########
+#eval "$(rbenv init -)"
+
 
 
 #############################################
@@ -141,8 +160,9 @@ eval "$(starship init zsh)"
 #   antigen
 #
 #############################################
-source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
-antigen init $HOME/.antigenrc
+#source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
+source /opt/homebrew/share/antigen/antigen.zsh
+#antigen init $HOME/.antigenrc
 
 
 #############################################
@@ -161,7 +181,7 @@ eval $(thefuck --alias)
 #   my terminal preferences
 #
 #############################################
-set history=5000
+set history=500000
 
 
 #############################################
@@ -171,28 +191,44 @@ set history=5000
 #############################################
 alias week='date +%V'
 alias h="history"
-alias hg="history | grep"
 alias cat="ccat"
-alias grep='grep --color=auto '
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
-alias pa='php artisan'
 alias vizshrc='vi ~/.zshrc'
+#unalias grep
+#unalias hg
+
+hg() {
+  local out
+  out=$(history)
+  for arg in "$@"; do
+    out=$(printf '%s\n' "$out" | grep --color=auto  -- "$arg")
+  done
+  printf '%s\n' "$out"
+}
+
+alias grep='grep --color=auto'
 
 # Herd injected PHP binary.
 #export PATH="/Users/timvandewalle/Library/Application Support/Herd/bin/":$PATH
-export PATH=$PATH:$HOME/.composer/vendor/bin
+#export PATH=$PATH:$HOME/.composer/vendor/bin
 
 
 # Herd injected PHP 8.2 configuration.
 #export HERD_PHP_82_INI_SCAN_DIR="/Users/timvandewalle/Library/Application Support/Herd/config/php/82/"
-export PATH="$PATH:."
+#export PATH="$PATH:."
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-#export PATH="/usr/local/opt/ruby/bin:$PATH"
-#export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
-#export PATH="$HOME/.rbenv/bin:$PATH"
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# asdf and teleport / tsh
+export PATH="$HOME/.asdf/shims:$PATH"
+asdf set teleport-ent 17.4.9
+
+# pnpm
+# export PNPM_HOME="/Users/timvandewalle/Library/pnpm"
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#   *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
+# pnpm end
 
 
-. /usr/local/opt/asdf/libexec/asdf.sh
