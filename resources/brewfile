@@ -3,33 +3,44 @@ tap 'homebrew/cask-fonts'
 tap 'homebrew/bundle'
 tap 'nicoverbruggen/homebrew-cask'
 
+# tools
+cask 'logitech-options'
+
+# apps
+cask 'spotify'
+cask 'google-chrome'
+
+# develop
+cask 'iterm2'
+cask 'visual-studio-code'
 
 brew 'coreutils'    # Those that come with macOS are outdated
 brew 'node'
 
-# brew 'zsh-syntax-highlighting'
+cask 'pycharm-ce'
+cask 'dbeaver-community'
+cask 'arduino-ide'
 
-cask 'logitech-options'
+
 cask 'fork'
 cask 'hyper'
 brew 'composer'    # Not needed when installing herd (herd = php, composer, laravel)
-# cask 'phpstorm'
-cask 'phpmon'
-cask 'dbngin'
-cask 'sequel-ace'
-cask 'spotify'
-cask 'google-chrome'
-cask 'iterm2'
-cask 'visual-studio-code'
-cask 'arduino-ide'
-cask 'steam'
-cask 'tableplus'
-cask 'pycharm-ce'
-cask 'dbeaver-community'
-#cask 'commander-one'
 
 cask 'docker'
 cask 'docker-desktop'
+
+# brew 'zsh-syntax-highlighting'
+
+
+
+
+# cask 'phpstorm'
+# cask 'phpmon'
+# cask 'dbngin'
+# cask 'sequel-ace'
+# cask 'steam'
+# cask 'tableplus'
+#cask 'commander-one'
 
 brew 'python3'
 
