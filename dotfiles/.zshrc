@@ -1,16 +1,4 @@
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# add herd binaries to path
-#export PATH="$PATH:$HOME/Library/Application Support/Herd/bin/"
-
-
-# export NVM_DIR="$HOME/.nvm"
-#   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-#   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-
-
 export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 
 
@@ -161,7 +149,8 @@ eval "$(starship init zsh)"
 #
 #############################################
 #source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
-source /opt/homebrew/share/antigen/antigen.zsh
+source /usr/local/share/antigen/antigen.zsh
+
 #antigen init $HOME/.antigenrc
 
 
@@ -171,8 +160,8 @@ source /opt/homebrew/share/antigen/antigen.zsh
 #   https://github.com/nvbn/thefuck#installation
 #
 #############################################
-eval $(thefuck --alias FUCK)
-eval $(thefuck --alias)
+#eval $(thefuck --alias FUCK)
+#eval $(thefuck --alias)
 
 
 
@@ -217,11 +206,9 @@ alias grep='grep --color=auto'
 #export HERD_PHP_82_INI_SCAN_DIR="/Users/timvandewalle/Library/Application Support/Herd/config/php/82/"
 #export PATH="$PATH:."
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# asdf and teleport / tsh
-export PATH="$HOME/.asdf/shims:$PATH"
-asdf set teleport-ent 17.4.9
 
 # pnpm
 # export PNPM_HOME="/Users/timvandewalle/Library/pnpm"

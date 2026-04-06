@@ -25,12 +25,17 @@ run_script "Linking local dotfiles folder with github..." "./steps/link_github.s
 # Install tools and applications specified in the brewfile.
 run_command "Installing tools + apps..." "brew bundle --file ./resources/brewfile"
 
+# Install asdf plugins such as node, ruby, python
+run_script "Installing asdf plugins node, ruby, python" "./steps/install_asdf_plugins.sh"
+
 echo "Tools + apps are installed."
 print_after_newline "print_with_newline"
 
+# Install php/laravel.
+run_script "Installing php / laravel..." "./steps/install_php_laravel.sh"
+
 # Install Xdebug for PHP debugging.
 run_script "Installing Xdebug..." "./steps/install_xdebug.sh"
-
 
 # Clone other repositories.
 run_script "Cloning my repositories to local..." "./steps/clone_github_repositories.sh"
@@ -42,7 +47,7 @@ run_script "Installing zsh etc..." "./steps/setup_shell.sh"
 run_script "Loading macos settings..." "./steps/load_macos_preferences.sh"
 
 # Create symbolic links for dotfiles.
-#run_script "Symlinking dotfiles..." "./steps/symlink_dotfiles.sh"
+run_script "Symlinking dotfiles..." "./steps/symlink_dotfiles.sh"
 
 # Install snazzy theme.
 run_script "Installing snazzy theme ..." "./steps/install_shell_theme.sh"

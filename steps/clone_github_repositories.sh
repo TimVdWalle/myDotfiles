@@ -3,11 +3,13 @@
 LARAVEL=~/Projects/Laravel/
 OTHER=~/Projects/Other/
 JS=~/Projects/JavaScript/
+RUBY=~/Projects/Ruby/
 
 if [ ! -e $LARAVEL ]; then
   mkdir $LARAVEL
   mkdir $OTHER
-  mkdir JS
+  mkdir $JS
+  mkdir $RUBY
 
 #  git clone git@github.com:TimVdWalle/perfume-picker.git $LARAVEL/perfume-picker
 #  git clone git@github.com:TimVdWalle/text2playlist.git $LARAVEL/text2playlist
@@ -16,6 +18,8 @@ if [ ! -e $LARAVEL ]; then
   git clone git@github.com:TimVdWalle/commit-verbs.git $OTHER/commit-verbs
 
   git clone git@github.com:TimVdWalle/phpstan-watcher.git $JS/phpstan-watcher
+
+  git clone git@github.com:TimVdWalle/request_viewer.git $RUBY/request-viewer
 
   # setup git hook script(s)
   chmod +x $OTHER/commit-verbs/git-templates/hooks/prepare-commit-msg

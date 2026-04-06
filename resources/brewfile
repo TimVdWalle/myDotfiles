@@ -1,6 +1,3 @@
-tap 'homebrew/cask-fonts'
-#tap 'homebrew/cask-versions'
-tap 'homebrew/bundle'
 tap 'nicoverbruggen/homebrew-cask'
 
 # tools
@@ -29,7 +26,12 @@ brew 'composer'    # Not needed when installing herd (herd = php, composer, lara
 cask 'docker'
 cask 'docker-desktop'
 
-# brew 'zsh-syntax-highlighting'
+brew 'zsh-syntax-highlighting'
+
+brew 'asdf'
+
+
+
 
 
 
