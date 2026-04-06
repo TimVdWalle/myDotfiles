@@ -18,7 +18,6 @@ if [ -d ~/.oh-my-zsh ]; then
  	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-#brew tap homebrew/cask-fonts
 source "./resources/install_fonts.sh"
 
 # install starship prompt
@@ -34,7 +33,6 @@ fi
 
 # install antigen : Antigen is a small set of functions that help you easily manage your shell (zsh) plugins, called bundles
 brew install antigen
-brew install thefuck
 brew install chroma
 brew install ccat
 

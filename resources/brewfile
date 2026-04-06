@@ -1,5 +1,8 @@
 tap 'nicoverbruggen/homebrew-cask'
 
+brew 'zsh-syntax-highlighting'
+brew 'asdf'
+
 # tools
 cask 'logitech-options'
 
@@ -9,46 +12,48 @@ cask 'google-chrome'
 
 # develop
 cask 'iterm2'
+cask 'hyper'
+
 cask 'visual-studio-code'
-
-brew 'coreutils'    # Those that come with macOS are outdated
-brew 'node'
-
+cask 'webstorm'
 cask 'pycharm-ce'
 cask 'dbeaver-community'
 cask 'arduino-ide'
 
+cask 'commander-one'
 
 cask 'fork'
-cask 'hyper'
-brew 'composer'    # Not needed when installing herd (herd = php, composer, laravel)
-
+cask 'git'
 cask 'docker'
 cask 'docker-desktop'
 
-brew 'zsh-syntax-highlighting'
-
-brew 'asdf'
-
-
-
-
+brew 'wget'
+brew 'curl'
+brew 'nmap'
+brew 'htop'
+brew 'coreutils'    # Those that come with macOS are outdated
 
 
+# Mac App Store
+brew 'mas'                              # Mac App Store manager
+mas "ColorSlurp", id: 1287239339
 
+
+
+
+
+
+
+# Obsole: refactored, no longer needed, replaced with asdf, ...
+# brew 'composer'    # Not needed when installing herd (herd = php, composer, laravel)
 # cask 'phpstorm'
 # cask 'phpmon'
 # cask 'dbngin'
 # cask 'sequel-ace'
 # cask 'steam'
 # cask 'tableplus'
-#cask 'commander-one'
-
-brew 'python3'
-
-# Mac App Store
-brew 'mas'                              # Mac App Store manager
-mas "ColorSlurp", id: 1287239339
+# brew 'python3'
+# brew 'node'  # trying to use asdf instead for nodejs
 
 # raycast
 #cask 'raycast'

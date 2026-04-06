@@ -1,5 +1,5 @@
 
-export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+#export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 
 
 # Path to your oh-my-zsh installation.
@@ -207,7 +207,6 @@ alias grep='grep --color=auto'
 #export PATH="$PATH:."
 
 #source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 # pnpm
@@ -219,3 +218,5 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # pnpm end
 
 
+# must be last
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
