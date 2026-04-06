@@ -23,7 +23,6 @@ cask 'arduino-ide'
 cask 'commander-one'
 
 cask 'fork'
-cask 'git'
 cask 'docker'
 cask 'docker-desktop'
 
