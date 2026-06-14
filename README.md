@@ -13,7 +13,7 @@ cd ~ && mkdir 'Documents.nosync' && mkdir Documents.nosync/Projects && mkdir Doc
 ### Logi options
 + Open app
 + Login to my account
-+ Restore backup
++ Restore backup from ...
 
 ## Todo's after install
 + Drag projects folder into finder favourites from the Documents.nosync
