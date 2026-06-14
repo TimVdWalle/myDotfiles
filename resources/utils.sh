@@ -68,39 +68,6 @@ ask_for_confirmation() {
     read -r
 }
 
-install_xcode_command_line_tools() {
-    if ! xcode-select -p &> /dev/null; then
-        log "Installing Xcode Command Line Tools..."
-        
-        # Create a placeholder file to trick xcode-select into thinking an installation is already in progress
-        # which allows us to bypass the GUI popup and use the CLI installer.
-        touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-        
-        # Find the Command Line Tools update
-        local PROD=$(softwareupdate -l | grep "\*.*Command Line" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
-        
-        if [ -n "$PROD" ]; then
-            log "Found Command Line Tools: $PROD. Installing..."
-            softwareupdate -i "$PROD" --verbose
-        else
-            log "Could not find Command Line Tools update via softwareupdate. Falling back to xcode-select --install"
-            xcode-select --install &> /dev/null
-        fi
-
-        # Remove the placeholder file
-        rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-
-        # Wait until the Xcode Command Line Tools are installed
-        until xcode-select -p &> /dev/null; do
-            sleep 5
-        done
-
-        print_result $? "Xcode Command Line Tools installed"
-    else
-        log "Xcode Command Line Tools already installed."
-    fi
-}
-
 ask_for_sudo() {
     msg="Since this script will be altering your computer settings, "
     msg+="it's gonna need sudo privileges. Please enter your password…"
