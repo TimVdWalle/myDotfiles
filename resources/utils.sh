@@ -31,6 +31,13 @@ run_script() {
     source "$script_path"
 }
 
+run_execute_script() {
+    # Helper function to display a message and then run a script through execute
+    local message="$1"
+    local script_path="$2"
+    execute "source $script_path" "$message"
+}
+
 run_command() {
     local message="$1"
     local cmd="$2"
@@ -98,7 +105,6 @@ ask_for_sudo() {
         done
     ) &> /dev/null &
     SUDO_PID=$!
-    trap 'kill $SUDO_PID &> /dev/null' EXIT
 }
 
 ask_for_reboot() {
@@ -159,10 +165,10 @@ execute() {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # Execute commands in background
-
-    eval "$CMDS" \
-        &> "$OUT_FILE" \
-        2> "$ERR_FILE" &
+    # We use a subshell to ensure it handles the command correctly
+    (
+        eval "$CMDS"
+    ) &> "$OUT_FILE" 2> "$ERR_FILE" &
 
     cmdsPID=$!
 

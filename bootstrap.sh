@@ -6,6 +6,7 @@ print_info "Loading utils..."
 
 # Ask for sudo early to avoid multiple prompts
 ask_for_sudo
+trap 'kill $SUDO_PID &> /dev/null' EXIT
 
 # Check os
 check_os
