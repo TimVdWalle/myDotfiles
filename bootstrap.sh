@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-echo "Loading utils..."
+print_info "Loading utils..."
 source "./resources/utils.sh"
 source "./resources/utils-macos.sh"
 

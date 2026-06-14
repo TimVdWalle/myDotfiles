@@ -2,7 +2,7 @@
 
 check_os() {
   if [[ "$(uname)" != "Darwin" ]]; then
-      echo "This script is intended for MacOS only!"
+      print_error "This script is intended for MacOS only!"
       exit 1
   fi
 }
@@ -277,19 +277,19 @@ print_with_newline() {
 }
 
 print_success() {
-    print_in_green "[✔] $1\n"
+    print_in_green "✅ $1\n"
 }
 
 print_warning() {
-    print_in_yellow "[!] $1\n"
+    print_in_yellow "⚠️  $1\n"
 }
 
 print_info() {
-    print_in_cyan "[i] $1\n"
+    print_in_cyan "ℹ️  $1\n"
 }
 
 print_error() {
-    print_in_red "[✖] $1\n"
+    print_in_red "❌ $1\n"
 }
 
 print_error_stream() {
@@ -307,19 +307,19 @@ print_warning_stream() {
 }
 
 print_question() {
-    print_in_purple "[?] $1\n"
-    print "> "
+    print_in_purple "❓ $1 "
 }
 
 print_step() {
     print_with_newline
+    local step_num="$1"
+    local step_name="$2"
+    # Using a blue background with bold white text for steps
     printf "%b" \
-        "$(tput smul 2> /dev/null)" \
         "$(tput bold 2> /dev/null)" \
         "$(tput setaf 7 2> /dev/null)" \
-        "$(tput setab 0 2> /dev/null)" \
-        "Step $1: $2" \
-        "$(tput rmul 2> /dev/null)" \
+        "$(tput setab 4 2> /dev/null)" \
+        " 🚀 Step $step_num: $step_name " \
         "$(tput sgr0 2> /dev/null)"
     print_with_newline
 }
