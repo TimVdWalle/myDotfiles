@@ -23,6 +23,6 @@ for plugin in "${plugins[@]}"; do
         print_success "asdf plugin $plugin already added."
     fi
     execute "asdf install $plugin latest" "Installing latest $plugin"
-    execute "asdf global $plugin latest" "Setting global $plugin to latest"
+    execute "asdf set -u $plugin latest" "Setting global $plugin to latest"
 done
 
