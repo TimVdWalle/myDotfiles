@@ -2,7 +2,8 @@
 source "./resources/utils.sh"
 source "./resources/utils-macos.sh"
 
-cd "$(dirname "$0")/.."
+# Store original directory to return back after execution
+pushd "$(dirname "$0")/.." > /dev/null
 
 # Check if git is initialized in the current directory
 if ! is_git_repository; then
@@ -25,3 +26,5 @@ else
     fi
     execute "git remote add origin $url" "Adding origin: $url"
 fi
+
+popd > /dev/null
