@@ -54,7 +54,9 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
             print_error "Connection failed or key not yet recognized."
             print_info "Output: $ssh_output"
             print_question "Try again? (y) or press any other key to wait 10 seconds and retry automatically... "
-            read -r -t 10 response
+            # Use </dev/tty to ensure read works when script is run via source or pipe, 
+            # though here it is run via run_script which calls it.
+            read -r -t 10 response < /dev/tty
             if [[ "$response" != "y" ]]; then
                 print_info "Waiting 10 seconds..."
                 sleep 10
