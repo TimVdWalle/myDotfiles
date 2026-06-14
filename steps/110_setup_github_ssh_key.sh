@@ -44,8 +44,9 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
     while true; do
         print_info "Checking GitHub connectivity..."
         # ssh -T returns 1 on success for GitHub (it greets you but doesn't provide shell access)
-        # We check if the output contains "Hi [username]! You've successfully authenticated"
-        ssh_output=$(ssh -T -o ConnectTimeout=5 -o BatchMode=yes git@github.com 2>&1)
+        # We check the exit code and the output.
+        # GitHub's successful auth message is on stderr.
+        ssh_output=$(ssh -T -o ConnectTimeout=5 -o StrictHostKeyChecking=no git@github.com 2>&1)
         if [[ "$ssh_output" == *"successfully authenticated"* ]]; then
             print_success "GitHub connectivity verified!"
             break
@@ -53,14 +54,17 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
             print_error "Connection failed or key not yet recognized."
             print_info "Output: $ssh_output"
             print_question "Try again? (y) or press any other key to wait 10 seconds and retry automatically... "
-            read -r -t 10
-            # If user didn't press 'y' or timeout, we just loop again
+            read -r -t 10 response
+            if [[ "$response" != "y" ]]; then
+                print_info "Waiting 10 seconds..."
+                sleep 10
+            fi
         fi
     done
 else
     print_success "SSH key already exists for GitHub."
     # Even if it exists, good to verify connectivity if we are about to clone repos
-    if ! ssh -T -o ConnectTimeout=5 -o BatchMode=yes git@github.com 2>&1 | grep -q "successfully authenticated"; then
+    if ! ssh -T -o ConnectTimeout=5 -o StrictHostKeyChecking=no git@github.com 2>&1 | grep -q "successfully authenticated"; then
         print_warning "SSH key exists but GitHub connectivity failed. Please check your SSH agent or GitHub settings."
         ask_to_continue
     fi

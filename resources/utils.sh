@@ -71,7 +71,24 @@ ask_for_confirmation() {
 install_xcode_command_line_tools() {
     if ! xcode-select -p &> /dev/null; then
         log "Installing Xcode Command Line Tools..."
-        xcode-select --install &> /dev/null
+        
+        # Create a placeholder file to trick xcode-select into thinking an installation is already in progress
+        # which allows us to bypass the GUI popup and use the CLI installer.
+        touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+        
+        # Find the Command Line Tools update
+        local PROD=$(softwareupdate -l | grep "\*.*Command Line" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
+        
+        if [ -n "$PROD" ]; then
+            log "Found Command Line Tools: $PROD. Installing..."
+            softwareupdate -i "$PROD" --verbose
+        else
+            log "Could not find Command Line Tools update via softwareupdate. Falling back to xcode-select --install"
+            xcode-select --install &> /dev/null
+        fi
+
+        # Remove the placeholder file
+        rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 
         # Wait until the Xcode Command Line Tools are installed
         until xcode-select -p &> /dev/null; do
@@ -92,19 +109,6 @@ ask_for_sudo() {
     print_with_newline
 
     sudo -v
-
-    # Update existing `sudo` time stamp
-    # until this script has finished.
-    #
-    # https://gist.github.com/cowboy/3118588
-    (
-        while true; do
-            sudo -v
-            sleep 60
-            kill -0 "$$" || exit
-        done
-    ) &> /dev/null &
-    SUDO_PID=$!
 }
 
 ask_for_reboot() {
@@ -186,6 +190,14 @@ execute() {
 
     wait "$cmdsPID" &> /dev/null
     exitCode=$?
+
+    # If the background process asks for sudo, it might fail in execute
+    # so we check if the exit code is 1 and if the error log contains sudo related errors
+    if [ $exitCode -ne 0 ] && grep -q "sudo: a password is required" "$ERR_FILE" 2>/dev/null; then
+        print_warning "Sudo password required for: $MSG"
+        eval "$CMDS"
+        exitCode=$?
+    fi
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
