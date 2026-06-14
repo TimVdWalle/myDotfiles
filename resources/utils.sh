@@ -61,6 +61,22 @@ ask_for_confirmation() {
     read -r
 }
 
+install_xcode_command_line_tools() {
+    if ! xcode-select -p &> /dev/null; then
+        log "Installing Xcode Command Line Tools..."
+        xcode-select --install &> /dev/null
+
+        # Wait until the Xcode Command Line Tools are installed
+        until xcode-select -p &> /dev/null; do
+            sleep 5
+        done
+
+        print_result $? "Xcode Command Line Tools installed"
+    else
+        log "Xcode Command Line Tools already installed."
+    fi
+}
+
 ask_for_sudo() {
     msg="Since this script will be altering your computer settings, "
     msg+="it's gonna need sudo privileges. Please enter your password…"
@@ -74,11 +90,15 @@ ask_for_sudo() {
     # until this script has finished.
     #
     # https://gist.github.com/cowboy/3118588
-    while true; do
-        sudo -n true
-        sleep 60
-        kill -0 "$$" || exit
-    done &> /dev/null &
+    (
+        while true; do
+            sudo -n true
+            sleep 60
+            kill -0 "$$" || exit
+        done
+    ) &> /dev/null &
+    SUDO_PID=$!
+    trap 'kill $SUDO_PID &> /dev/null' EXIT
 }
 
 ask_for_reboot() {
@@ -94,18 +114,17 @@ ask_for_reboot() {
 ask_to_continue() {
     print_after_newline "Press any key to continue…" "print"
     print_with_newline
-	read -n 1
+    read -k 1
 	# Delete the visual inputted key to continue and perform an extra new line
 	print_with_newline "\r         "
 }
 
-directory_exits() {
-    # otherwise directories with ~ aren't recognised
-    [ -d "`eval echo ${1//>}`" ]
+directory_exists() {
+    [ -d "$1" ]
 }
 
 file_exists() {
-    [ -f "`eval echo ${1//>}`" ]
+    [ -f "$1" ]
 }
 
 cmd_exists() {
@@ -350,10 +369,10 @@ show_spinner() {
     # See also: https://unix.stackexchange.com/a/278888
     printf "\n\n\n"
     tput cuu 3
-    tput sc
 
     # Display spinner while the commands are being executed.
     while kill -0 "$PID" &>/dev/null; do
+        tput sc
         frameText="[${FRAMES:i++%NUMBER_OR_FRAMES:1}] $MSG"
         # Print frame text.
         printf "%s\n" "$frameText"

@@ -16,6 +16,7 @@ cask 'hyper'
 
 cask 'visual-studio-code'
 cask 'webstorm'
+cask 'rubymine'
 cask 'pycharm-ce'
 cask 'dbeaver-community'
 cask 'arduino-ide'

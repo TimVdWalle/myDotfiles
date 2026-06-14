@@ -24,3 +24,4 @@ cd ~ && mkdir 'Documents.nosync' && mkdir Documents.nosync/Projects && mkdir Doc
   ( ~/.config/starship.toml )
 + Do git init in every project where automatic conversion to emoji commit messages is wanted 
 + Open fork; drag myDotfiles folder into it; discard all changes; checkout master branch from origin; fetch and pull
++ Setup AI in editor(s) eg Jetbrains Junie 
