@@ -1,36 +1,27 @@
 #!/usr/bin/env zsh
+source "./resources/utils.sh"
+source "./resources/utils-macos.sh"
 
-# Install zsh with brew
-if ! brew list zsh &> /dev/null; then
-    execute "brew install zsh" "Installing zsh with brew"
-else
-    print_success "zsh is already installed via brew."
-fi
-
-# Install oh-my-zsh
+# Oh-my-zsh (using curl directly if you prefer it outside antigen)
 if [ -d ~/.oh-my-zsh ]; then
-	print_success "oh-my-zsh is already installed."
+    print_success "oh-my-zsh is already installed."
 else
- 	print_info "Installing oh-my-zsh..."
- 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    print_info "Installing oh-my-zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 source "./resources/install_fonts.sh"
 
 # install starship prompt
 if ! cmd_exists "starship"; then
-    execute "brew install starship" "Installing starship"
+    print_warning "Starship not found, but it should have been installed via brew bundle."
 fi
 
-if [ -f ~/.config/starship.toml ]; then
-  print_success "starship prompt already configured."
-else
-  print_info "Setting up pure prompt with starship..."
-  mkdir -p ~/.config
-  starship preset pure-preset -o ~/.config/starship.toml
-fi
+# Note: starship.toml configuration is handled in step 400 (symlinked from repo)
 
-# install antigen and other shell tools
-execute "brew install antigen chroma ccat" "Installing shell tools (antigen, chroma, ccat)"
+# antigen and other tools should already be installed via Brewfile
+if ! cmd_exists "antigen"; then
+    print_warning "Antigen not found. Check your Brewfile installation."
+fi
 
 

@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+source "./resources/utils.sh"
+source "./resources/utils-macos.sh"
+
 # Check for Homebrew and install if we don't have it
 if ! cmd_exists "brew"; then
   print_info "HomeBrew not installed yet. Installing..."

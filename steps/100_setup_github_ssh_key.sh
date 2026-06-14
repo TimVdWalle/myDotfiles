@@ -1,10 +1,16 @@
 #!/usr/bin/env zsh
+source "./resources/utils.sh"
+source "./resources/utils-macos.sh"
 
 if [ ! -f ~/.ssh/id_ed25519 ]; then
     print_info "Generating ssh key for github..."
 
-    ask_for_input "Please enter your email:"
-    email=$REPLY
+    if [ -n "$GIT_EMAIL" ]; then
+        email=$GIT_EMAIL
+    else
+        ask_for_input "Please enter your email:"
+        email=$REPLY
+    fi
     print_info "SSH key will be created with label: $email"
 
     # Generating a new SSH key
@@ -15,8 +21,14 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
     # https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent
     eval "$(ssh-agent -s)"
 
+    mkdir -p ~/.ssh
     touch ~/.ssh/config
-    echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed25519" | tee ~/.ssh/config
+    if ! grep -q "id_ed25519" ~/.ssh/config; then
+        print_info "Updating SSH config..."
+        echo "Host *\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
+    else
+        print_success "SSH config already contains id_ed25519 entry."
+    fi
 
     ssh-add ~/.ssh/id_ed25519 --apple-use-keychain
 

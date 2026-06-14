@@ -1,4 +1,6 @@
 #!/usr/bin/env zsh
+source "./resources/utils.sh"
+source "./resources/utils-macos.sh"
 
 # Directory containing the dotfiles
 dotfiles_dir="$(cd "$(dirname "$0")/.." && pwd)/dotfiles"
@@ -8,6 +10,18 @@ home_dir=~
 
 # List of dotfiles to potentially symlink
 list_of_dotfiles=(".hyper.js" ".zprofile" ".zshrc" ".antigenrc" ".config/starship.toml")
+
+# Special handling for starship.toml fallback
+starship_repo_path="$dotfiles_dir/.config/starship.toml"
+if [ ! -f "$starship_repo_path" ]; then
+    print_info "Starship config not found in repository. Generating default (pure-preset) in repo..."
+    mkdir -p "$(dirname "$starship_repo_path")"
+    if cmd_exists "starship"; then
+        starship preset pure-preset -o "$starship_repo_path"
+    else
+        print_warning "Starship not installed yet, cannot generate default config in repo."
+    fi
+fi
 
 # Loop through each file and create a symlink only if the file exists in the dotfiles directory
 for file in "${list_of_dotfiles[@]}"; do
@@ -19,9 +33,12 @@ for file in "${list_of_dotfiles[@]}"; do
     mkdir -p "$(dirname "$link_file")"
 
     # Remove existing file in the home directory if it exists
-    if [ -f "$link_file" ] || [ -L "$link_file" ]; then
-      print_info "Removing existing $file in home directory."
+    if [ -L "$link_file" ]; then
+      print_info "Removing existing symlink $file in home directory."
       rm "$link_file"
+    elif [ -f "$link_file" ]; then
+      print_warning "Backing up existing file $file to $file.bak"
+      mv "$link_file" "$link_file.bak"
     fi
 
     # Create a new symlink

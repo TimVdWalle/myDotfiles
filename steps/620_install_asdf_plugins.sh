@@ -1,4 +1,18 @@
 #!/usr/bin/env zsh
+source "./resources/utils.sh"
+source "./resources/utils-macos.sh"
+
+# Ensure asdf is available in the current subshell
+if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+    source /opt/homebrew/opt/asdf/libexec/asdf.sh
+elif [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
+    source /usr/local/opt/asdf/libexec/asdf.sh
+fi
+
+if ! cmd_exists "asdf"; then
+    print_error "asdf command not found. Please ensure it is installed via Homebrew."
+    exit 1
+fi
 
 plugins=("nodejs" "ruby" "python")
 

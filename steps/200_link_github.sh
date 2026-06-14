@@ -1,9 +1,6 @@
 #!/usr/bin/env zsh
-
-print_info "Checking git installation..."
-if ! cmd_exists "git"; then
-    execute "brew install git" "Installing git"
-fi
+source "./resources/utils.sh"
+source "./resources/utils-macos.sh"
 
 cd "$(dirname "$0")/.."
 
@@ -20,5 +17,11 @@ if git remote -v | grep -q "origin"; then
     print_success "Origin already set."
 else
     print_info "Setting origin..."
-    execute "git remote add origin git@github.com:TimVdWalle/myDotfiles.git" "Adding origin"
+    if [ -n "$DOTFILES_REMOTE" ]; then
+        url=$DOTFILES_REMOTE
+    else
+        ask_for_input "Please enter the remote URL for your dotfiles (git@github.com:username/repo.git):"
+        url=$REPLY
+    fi
+    execute "git remote add origin $url" "Adding origin: $url"
 fi

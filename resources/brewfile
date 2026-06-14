@@ -1,6 +1,12 @@
 tap 'nicoverbruggen/homebrew-cask'
 
+brew 'zsh'
 brew 'zsh-syntax-highlighting'
+brew 'starship'
+brew 'antigen'
+brew 'chroma'
+brew 'ccat'
+brew 'git'
 brew 'asdf'
 
 # tools

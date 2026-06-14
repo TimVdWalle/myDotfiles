@@ -23,11 +23,11 @@ log() {
 }
 
 run_script() {
-    # Helper function to display a message and then run a script.
+    # Helper function to display a message and then run a script in a subshell.
     local message="$1"
     local script_path="$2"
     log "$message"
-    source "$script_path"
+    zsh "$script_path"
 }
 
 run_command() {

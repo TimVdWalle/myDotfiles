@@ -16,9 +16,45 @@ install_xcode_command_line_tools
 # Confirm user intent before proceeding.
 confirm_install
 
+# Collect configuration details upfront
+print_info "Collecting configuration..."
+ask_for_input "Please enter your email (for SSH key and Git):"
+export GIT_EMAIL=$REPLY
+
+# Try to detect the remote origin URL if it's already a git repo
+if is_git_repository; then
+    DETECTED_URL=$(git remote get-url origin 2>/dev/null)
+fi
+
+if [ -n "$DETECTED_URL" ]; then
+    print_question "Detected remote origin: $DETECTED_URL. Use this? (y/n)"
+    read -r
+    if answer_is_yes; then
+        export DOTFILES_REMOTE=$DETECTED_URL
+    fi
+fi
+
+if [ -z "$DOTFILES_REMOTE" ]; then
+    while true; do
+        ask_for_input "Please enter the remote URL for your dotfiles repository (e.g. git@github.com:username/repo.git):"
+        url=$REPLY
+        # Simple regex for git@github.com:user/repo.git or https://github.com/user/repo.git
+        if [[ "$url" =~ ^(git@github\.com:|https://github\.com/)[a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+\.git$ ]]; then
+            export DOTFILES_REMOTE=$url
+            break
+        else
+            print_error "Invalid format. Please use 'git@github.com:user/repo.git' or 'https://github.com/user/repo.git'"
+        fi
+    done
+fi
+
 # Install HomeBrew
 print_step "000" "HomeBrew"
 run_script "Installing HomeBrew..." "./steps/000_install_homebrew.sh"
+
+# Install tools and applications specified in the brewfile.
+print_step "010" "Brew Packages"
+run_script "Installing tools + apps from Brewfile..." "./steps/010_install_brew_packages.sh"
 
 # Set SSH key for GitHub integration.
 print_step "100" "GitHub SSH Key"
@@ -32,14 +68,6 @@ run_script "Linking local dotfiles folder with github..." "./steps/200_link_gith
 print_step "300" "Symlink Folders"
 run_script "Creating symlinks for Projects..." "./steps/300_symlink_folders.sh"
 
-# Create symbolic links for dotfiles.
-print_step "400" "Symlink Dotfiles"
-run_script "Symlinking dotfiles..." "./steps/400_symlink_dotfiles.sh"
-
-# Install tools and applications specified in the brewfile.
-print_step "Brew" "Tools & Apps"
-run_command "Installing tools + apps..." "brew bundle --file ./resources/Brewfile"
-
 # Set up the shell environment.
 print_step "500" "Shell Environment"
 run_script "Installing zsh etc..." "./steps/500_setup_shell.sh"
@@ -47,6 +75,10 @@ run_script "Installing zsh etc..." "./steps/500_setup_shell.sh"
 # Install snazzy theme.
 print_step "510" "Shell Theme"
 run_script "Installing snazzy theme ..." "./steps/510_install_shell_theme.sh"
+
+# Create symbolic links for dotfiles.
+print_step "400" "Symlink Dotfiles"
+run_script "Symlinking dotfiles..." "./steps/400_symlink_dotfiles.sh"
 
 # Install asdf plugins such as node, ruby, python
 print_step "620" "ASDF Plugins"

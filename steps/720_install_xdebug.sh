@@ -1,4 +1,6 @@
 #!/bin/sh
+source "./resources/utils.sh"
+source "./resources/utils-macos.sh"
 
 # https://docs.devsense.com/en/vscode/debug/xdebug-mac
 ARCHITECTURE=$(uname -m)

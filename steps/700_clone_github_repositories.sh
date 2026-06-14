@@ -1,4 +1,6 @@
 #!/usr/bin/env zsh
+source "./resources/utils.sh"
+source "./resources/utils-macos.sh"
 
 LARAVEL=~/Projects/Laravel/
 OTHER=~/Projects/Other/
