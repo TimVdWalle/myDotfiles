@@ -27,7 +27,8 @@ run_script() {
     local message="$1"
     local script_path="$2"
     log "$message"
-    zsh "$script_path"
+    # shellcheck disable=SC2039
+    source "$script_path"
 }
 
 run_command() {

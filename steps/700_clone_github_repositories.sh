@@ -23,10 +23,14 @@ clone_repo() {
     fi
 }
 
-clone_repo "git@github.com:TimVdWalle/dart-score.git" "$LARAVEL/dart-score" "Cloning dart-score"
-clone_repo "git@github.com:TimVdWalle/commit-verbs.git" "$OTHER/commit-verbs" "Cloning commit-verbs"
-clone_repo "git@github.com:TimVdWalle/phpstan-watcher.git" "$JS/phpstan-watcher" "Cloning phpstan-watcher"
-clone_repo "git@github.com:TimVdWalle/request_viewer.git" "$RUBY/request-viewer" "Cloning request-viewer"
+if [ "$IS_TESTING" = "true" ]; then
+    print_info "Skipping repository cloning in testing mode."
+else
+    clone_repo "git@github.com:TimVdWalle/dart-score.git" "$LARAVEL/dart-score" "Cloning dart-score"
+    clone_repo "git@github.com:TimVdWalle/commit-verbs.git" "$OTHER/commit-verbs" "Cloning commit-verbs"
+    clone_repo "git@github.com:TimVdWalle/phpstan-watcher.git" "$JS/phpstan-watcher" "Cloning phpstan-watcher"
+    clone_repo "git@github.com:TimVdWalle/request_viewer.git" "$RUBY/request-viewer" "Cloning request-viewer"
+fi
 
 # setup git hook script(s)
 if [ -f "$OTHER/commit-verbs/git-templates/hooks/prepare-commit-msg" ]; then

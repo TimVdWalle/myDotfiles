@@ -19,5 +19,13 @@ fi
 
 # Update Homebrew recipes
 execute "brew update" "Updating Homebrew recipes"
-execute "brew upgrade" "Upgrading Homebrew"
+
+# 'brew upgrade' checks all your installed packages for updates.
+# It can take a long time if you have many packages, even if they are up to date,
+# because it has to verify each one against the latest version online.
+if [ "$IS_TESTING" = "true" ]; then
+  print_info "Skipping 'brew upgrade' because you are in testing mode."
+else
+  execute "brew upgrade" "Upgrading Homebrew"
+fi
 

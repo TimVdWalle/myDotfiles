@@ -5,6 +5,17 @@ source "./resources/utils-macos.sh"
 # Collect configuration details upfront
 print_info "Collecting configuration..."
 
+if [ -z "$IS_TESTING" ]; then
+    print_question "Are you testing the script? (y/n)"
+    print_info "(If yes, some time-consuming steps like 'brew upgrade' will be skipped)"
+    read -r
+    if answer_is_yes; then
+        export IS_TESTING=true
+    else
+        export IS_TESTING=false
+    fi
+fi
+
 if [ -z "$GIT_EMAIL" ]; then
     ask_for_input "Please enter your email (for SSH key and Git):"
     export GIT_EMAIL=$REPLY
