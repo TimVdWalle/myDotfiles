@@ -30,7 +30,6 @@ cask 'arduino-ide'
 cask 'commander-one'
 
 cask 'fork'
-cask 'docker'
 cask 'docker-desktop'
 
 brew 'wget'

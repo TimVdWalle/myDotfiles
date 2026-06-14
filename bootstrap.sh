@@ -12,6 +12,7 @@ confirm_install
 
 # Ask for sudo early to avoid multiple prompts
 ask_for_sudo
+brew trust nicoverbruggen/cask
 
 # Collect configuration details upfront
 source "./steps/005_collect_config.sh"
