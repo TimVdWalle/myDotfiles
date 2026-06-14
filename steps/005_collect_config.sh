@@ -17,7 +17,10 @@ if is_git_repository; then
 fi
 
 if [ -n "$DETECTED_URL" ]; then
-    print_question "Detected remote origin: $DETECTED_URL. Use this? (y/n)"
+    print_info "We detected that this folder is already linked to a GitHub repository:"
+    print_info "  $DETECTED_URL"
+    print_question "Should we use this as the primary remote for your dotfiles? (y/n)"
+    print_info "(This will be used to link your local configuration to your online GitHub repository)"
     read -r
     if answer_is_yes; then
         export DOTFILES_REMOTE=$DETECTED_URL
