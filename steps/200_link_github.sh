@@ -22,5 +22,3 @@ else
     print_info "Setting origin..."
     execute "git remote add origin git@github.com:TimVdWalle/myDotfiles.git" "Adding origin"
 fi
-
-print_after_newline "print_with_newline"

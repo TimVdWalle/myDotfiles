@@ -32,4 +32,3 @@ for file in "${list_of_dotfiles[@]}"; do
 done
 
 print_success "Dotfiles have been symlinked."
-print_after_newline "print_with_newline"

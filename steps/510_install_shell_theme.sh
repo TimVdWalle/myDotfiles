@@ -6,6 +6,4 @@ print_info "Open hyper terminal app, and close it again"
 ask_to_continue
 execute "hyper install hyper-snazzy" "Installing hyper-snazzy theme"
 
-print_after_newline "print_with_newline"
 
-print_after_newline "print_with_newline"

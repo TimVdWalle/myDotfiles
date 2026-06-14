@@ -33,5 +33,3 @@ if [ -f "$OTHER/commit-verbs/git-templates/hooks/prepare-commit-msg" ]; then
 fi
 
 print_success "GitHub repositories check complete."
-
-print_after_newline "print_with_newline"

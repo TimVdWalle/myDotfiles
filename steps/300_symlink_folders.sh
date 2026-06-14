@@ -5,5 +5,3 @@ if [ ! -e ~/Projects ]; then
 else
   print_success "The directory or symlink '~/Projects' already exists."
 fi
-
-print_after_newline "print_with_newline"

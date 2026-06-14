@@ -12,4 +12,3 @@ for plugin in "${plugins[@]}"; do
     execute "asdf global $plugin latest" "Setting global $plugin to latest"
 done
 
-print_after_newline "print_with_newline"

@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
-composer global require laravel/valet
-composer global require laravel/installer
-valet install
-brew install --cask phpmon
+execute "composer global require laravel/valet" "Installing Laravel Valet"
+execute "composer global require laravel/installer" "Installing Laravel Installer"
+execute "valet install" "Setting up Valet"
+execute "brew install --cask phpmon" "Installing PHP Monitor"

@@ -10,4 +10,3 @@ print_info "Ruby: $(ruby -v | head -n 1)"
 print_info "Python: $(python3 --version)"
 
 print_success "Installation complete!"
-print_after_newline "print_with_newline"

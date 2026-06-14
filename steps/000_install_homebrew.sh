@@ -15,8 +15,6 @@ else
 fi
 
 # Update Homebrew recipes
-print_info "Updating Homebrew..."
-brew update
-brew upgrade
+execute "brew update" "Updating Homebrew recipes"
+execute "brew upgrade" "Upgrading Homebrew"
 
-print_after_newline "print_with_newline"

@@ -33,6 +33,4 @@ fi
 # install antigen and other shell tools
 execute "brew install antigen chroma ccat" "Installing shell tools (antigen, chroma, ccat)"
 
-print_after_newline "print_with_newline"
 
-print_after_newline "print_with_newline"

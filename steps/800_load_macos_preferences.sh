@@ -9,5 +9,3 @@ quit_system_preferences
 # execute "defaults write com.apple.dock \"show-recents\" -bool \"false\" && killall Dock" "Hide recent apps in Dock"
 
 print_success "MacOS settings preferences are loaded."
-
-print_after_newline "print_with_newline"

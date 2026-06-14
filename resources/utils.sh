@@ -13,14 +13,13 @@ confirm_install(){
       exit 1
   else
     log "Setting up your Mac..."
-    print_after_newline "print_with_newline"
   fi
 }
 
 log() {
     # Logging function to timestamp each action.
     #echo "[$(date +%Y-%m-%d\ %H:%M:%S)] $1"
-    echo "$1"
+    print_info "$1"
 }
 
 run_script() {
@@ -326,7 +325,6 @@ print_step() {
 }
 
 print_after_newline() {
-    print_with_newline
     $2 "$1"
 }
 
@@ -360,23 +358,14 @@ show_spinner() {
     local i=0
     local frameText=""
 
-    # Provide more space so that the text hopefully
-    # doesn't reach the bottom line of the terminal window.
-    #
-    # This is a workaround for escape sequences not tracking
-    # the buffer position (accounting for scrolling).
-    #
-    # See also: https://unix.stackexchange.com/a/278888
-    printf "\n\n\n"
-    tput cuu 3
-
     # Display spinner while the commands are being executed.
     while kill -0 "$PID" &>/dev/null; do
         tput sc
         frameText="[${FRAMES:i++%NUMBER_OR_FRAMES:1}] $MSG"
         # Print frame text.
-        printf "%s\n" "$frameText"
+        printf "%s" "$frameText"
         sleep 0.2
         tput rc
+        tput el
     done
 }

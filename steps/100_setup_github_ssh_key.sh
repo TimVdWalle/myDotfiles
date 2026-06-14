@@ -31,4 +31,3 @@ else
     print_success "SSH key already exists for GitHub."
 fi
 
-print_after_newline "print_with_newline"
