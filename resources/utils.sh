@@ -329,8 +329,7 @@ print_after_newline() {
 }
 
 set_trap() {
-    trap -p "$1" | grep "$2" &> /dev/null \
-        || trap '$2' "$1"
+    trap "$2" "$1"
 }
 
 skip_questions() {
@@ -361,9 +360,13 @@ show_spinner() {
     # Display spinner while the commands are being executed.
     while kill -0 "$PID" &>/dev/null; do
         tput sc
-        frameText="[${FRAMES:i++%NUMBER_OR_FRAMES:1}] $MSG"
+        # In Zsh, strings are 1-indexed.
+        # Use (( ... )) for arithmetic and calculate the index.
+        local idx=$(( (i % NUMBER_OR_FRAMES) + 1 ))
+        frameText="[${FRAMES[$idx]}] $MSG"
         # Print frame text.
         printf "%s" "$frameText"
+        (( i++ ))
         sleep 0.2
         tput rc
         tput el
