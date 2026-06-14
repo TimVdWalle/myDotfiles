@@ -21,7 +21,8 @@ fi
 # Note: starship.toml configuration is handled in step 400 (symlinked from repo)
 
 # antigen and other tools should already be installed via Brewfile
-if ! cmd_exists "antigen"; then
+# We check if antigen exists in common brew paths if not in PATH
+if ! cmd_exists "antigen" && [ ! -f "/opt/homebrew/bin/antigen" ] && [ ! -f "/usr/local/bin/antigen" ] && [ ! -f "/opt/homebrew/share/antigen/antigen.zsh" ] && [ ! -f "/usr/local/share/antigen/antigen.zsh" ]; then
     print_warning "Antigen not found. Check your Brewfile installation."
 fi
 
