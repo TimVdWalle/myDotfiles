@@ -7,7 +7,8 @@ if [ -d ~/.oh-my-zsh ]; then
     print_success "oh-my-zsh is already installed."
 else
     print_info "Installing oh-my-zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    # We set CHSH=no and RUNZSH=no to prevent the installer from changing the shell or launching zsh immediately
+    sh -c "CHSH=no RUNZSH=no $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 source "./resources/install_fonts.sh"

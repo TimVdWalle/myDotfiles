@@ -38,8 +38,31 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
     pbcopy < ~/.ssh/id_ed25519.pub
     cat ~/.ssh/id_ed25519.pub
     print_success "Copied to clipboard"
-    ask_to_continue
+
+    print_warning "Halt: Please add the SSH key above to your GitHub account (https://github.com/settings/keys) before continuing."
+    
+    while true; do
+        print_info "Checking GitHub connectivity..."
+        # ssh -T returns 1 on success for GitHub (it greets you but doesn't provide shell access)
+        # We check if the output contains "Hi [username]! You've successfully authenticated"
+        ssh_output=$(ssh -T -o ConnectTimeout=5 -o BatchMode=yes git@github.com 2>&1)
+        if [[ "$ssh_output" == *"successfully authenticated"* ]]; then
+            print_success "GitHub connectivity verified!"
+            break
+        else
+            print_error "Connection failed or key not yet recognized."
+            print_info "Output: $ssh_output"
+            print_question "Try again? (y) or press any other key to wait 10 seconds and retry automatically... "
+            read -r -t 10
+            # If user didn't press 'y' or timeout, we just loop again
+        fi
+    done
 else
     print_success "SSH key already exists for GitHub."
+    # Even if it exists, good to verify connectivity if we are about to clone repos
+    if ! ssh -T -o ConnectTimeout=5 -o BatchMode=yes git@github.com 2>&1 | grep -q "successfully authenticated"; then
+        print_warning "SSH key exists but GitHub connectivity failed. Please check your SSH agent or GitHub settings."
+        ask_to_continue
+    fi
 fi
 
