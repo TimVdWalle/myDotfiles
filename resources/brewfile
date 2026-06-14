@@ -8,6 +8,10 @@ brew 'chroma'
 brew 'ccat'
 brew 'git'
 brew 'asdf'
+brew 'libyaml'
+brew 'openssl'
+brew 'readline'
+brew 'gmp'
 
 # tools
 cask 'logitech-options'

@@ -22,7 +22,11 @@ for plugin in "${plugins[@]}"; do
     else
         print_success "asdf plugin $plugin already added."
     fi
+    if [ "$plugin" = "ruby" ]; then
+        # Ensure libyaml and other dependencies from homebrew are used
+        export RUBY_CONFIGURE_OPTS="--with-libyaml-dir=$(brew --prefix libyaml) --with-openssl-dir=$(brew --prefix openssl) --with-readline-dir=$(brew --prefix readline) --with-gmp-dir=$(brew --prefix gmp)"
+    fi
     execute "asdf install $plugin latest" "Installing latest $plugin"
-    execute "asdf set -u $plugin latest" "Setting global $plugin to latest"
+    execute "asdf set -u $plugin latest" "Setting global $plugin to latest" || execute "asdf global $plugin latest" "Setting global $plugin to latest (fallback)"
 done
 
