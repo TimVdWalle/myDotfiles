@@ -28,7 +28,7 @@ for file in "${list_of_dotfiles[@]}"; do
   target_file="$dotfiles_dir/$file"
   link_file="$home_dir/$file"
 
-  if [ -f "$target_file" ]; then
+  if [ -f "$target_file" ] || [ -d "$target_file" ]; then
     # Ensure parent directory exists for files like .config/starship.toml
     mkdir -p "$(dirname "$link_file")"
 
@@ -36,15 +36,23 @@ for file in "${list_of_dotfiles[@]}"; do
     if [ -L "$link_file" ]; then
       print_info "Removing existing symlink $file in home directory."
       rm "$link_file"
-    elif [ -f "$link_file" ]; then
-      print_warning "Backing up existing file $file to $file.bak"
+    elif [ -e "$link_file" ]; then
+      print_warning "Backing up existing file/directory $file to $file.bak"
       mv "$link_file" "$link_file.bak"
     fi
 
     # Create a new symlink
     execute "ln -s $target_file $link_file" "Creating symlink for $file"
   else
-    print_warning "Skipping $file since it does not exist in $dotfiles_dir."
+    # Check if it's .zshrc and if it exists in home dir but not in repo
+    if [[ "$file" == ".zshrc" ]] && [[ -f "$link_file" ]] && [[ ! -f "$target_file" ]]; then
+       print_info "Found .zshrc in home but not in repo. Moving it to repo to track it."
+       mkdir -p "$(dirname "$target_file")"
+       mv "$link_file" "$target_file"
+       execute "ln -s $target_file $link_file" "Creating symlink for $file"
+    else
+       print_warning "Skipping $file since it does not exist in $dotfiles_dir."
+    fi
   fi
 done
 

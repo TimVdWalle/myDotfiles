@@ -35,7 +35,11 @@ run_execute_script() {
     # Helper function to display a message and then run a script through execute
     local message="$1"
     local script_path="$2"
-    execute "source $script_path" "$message"
+    if file_exists "$script_path"; then
+        execute "source $script_path" "$message"
+    else
+        execute "$script_path" "$message"
+    fi
 }
 
 run_command() {
@@ -75,7 +79,15 @@ ask_for_sudo() {
     print_after_newline "$msg" "print_in_purple"
     print_with_newline
 
+    # Update sudo timestamp until the script has finished
     sudo -v
+    while true; do
+        sudo -n true
+        sleep 60
+        kill -0 "$$" || exit
+    done &
+    SUDO_PID=$!
+    trap 'kill $SUDO_PID &> /dev/null' EXIT
 }
 
 ask_for_reboot() {
@@ -91,7 +103,14 @@ ask_for_reboot() {
 ask_to_continue() {
     print_after_newline "Press any key to continue…" "print"
     print_with_newline
-    read -k 1
+    # Using 'read -r -k 1' to wait for a single character in zsh
+    # or fallback to 'read -r -n 1' for bash compatibility if needed, 
+    # but we aim for zsh.
+    if [ -n "$ZSH_VERSION" ]; then
+        read -r -k 1
+    else
+        read -r -n 1
+    fi
 	# Delete the visual inputted key to continue and perform an extra new line
 	print_with_newline "\r         "
 }

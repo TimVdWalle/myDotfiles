@@ -27,6 +27,6 @@ for plugin in "${plugins[@]}"; do
         export RUBY_CONFIGURE_OPTS="--with-libyaml-dir=$(brew --prefix libyaml) --with-openssl-dir=$(brew --prefix openssl) --with-readline-dir=$(brew --prefix readline) --with-gmp-dir=$(brew --prefix gmp)"
     fi
     execute "asdf install $plugin latest" "Installing latest $plugin"
-    execute "asdf set -u $plugin latest" "Setting global $plugin to latest" || execute "asdf global $plugin latest" "Setting global $plugin to latest (fallback)"
+    execute "asdf global $plugin latest" "Setting global $plugin to latest"
 done
 

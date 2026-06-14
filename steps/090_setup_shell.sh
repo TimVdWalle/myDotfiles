@@ -11,6 +11,11 @@ else
     sh -c "CHSH=no RUNZSH=no $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
+# Ensure .zshrc exists (at least an empty one) so it can be used for oh-my-zsh/antigen
+if [ ! -f ~/.zshrc ]; then
+    touch ~/.zshrc
+fi
+
 source "./resources/install_fonts.sh"
 
 # install starship prompt

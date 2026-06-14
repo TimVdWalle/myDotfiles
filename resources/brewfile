@@ -1,5 +1,3 @@
-tap 'nicoverbruggen/homebrew-cask'
-
 brew 'zsh'
 brew 'zsh-syntax-highlighting'
 brew 'starship'
@@ -26,15 +24,15 @@ cask 'hyper'
 
 cask 'visual-studio-code'
 cask 'webstorm'
-cask 'rubymine'
-cask 'pycharm-ce'
-cask 'dbeaver-community'
-cask 'arduino-ide'
+#cask 'rubymine'
+#cask 'pycharm-ce'
+#cask 'dbeaver-community'
+#cask 'arduino-ide'
 
-cask 'commander-one'
+#cask 'commander-one'
 
 cask 'fork'
-cask 'docker-desktop'
+#cask 'docker-desktop'
 
 brew 'wget'
 brew 'curl'

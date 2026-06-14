@@ -2,6 +2,13 @@
 source "./resources/utils.sh"
 source "./resources/utils-macos.sh"
 
+# Ensure asdf is available in the current subshell
+if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+    source /opt/homebrew/opt/asdf/libexec/asdf.sh
+elif [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
+    source /usr/local/opt/asdf/libexec/asdf.sh
+fi
+
 print_step 900 "Installation Overview"
 
 print_info "Shell: $SHELL"
