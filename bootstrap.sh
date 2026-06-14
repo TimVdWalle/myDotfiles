@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
-
-print_info "Loading utils..."
 source "./resources/utils.sh"
 source "./resources/utils-macos.sh"
+
+print_info "Loading utils..."
 
 # Ask for sudo early to avoid multiple prompts
 ask_for_sudo
