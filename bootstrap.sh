@@ -10,6 +10,9 @@ check_os
 # Confirm user intent before proceeding.
 confirm_install
 
+# Ask for sudo early to avoid multiple prompts
+ask_for_sudo
+
 # Collect configuration details upfront
 source "./steps/005_collect_config.sh"
 
@@ -25,19 +28,11 @@ run_script "Installing HomeBrew..." "./steps/030_install_homebrew.sh"
 # Link local dotfiles folder to GitHub.
 run_script "Linking local dotfiles folder with github..." "./steps/040_link_github.sh"
 
-# Ask for sudo early to avoid multiple prompts
-ask_for_sudo
-
 # Install tools and applications specified in the brewfile.
 run_command "Installing tools + apps..." "brew bundle --file ./resources/brewfile"
-run_script "Installing PHP + Laravel..." "./steps/060_install_php_laravel.sh"
 
 echo "Tools + apps are installed."
 print_after_newline "print_with_newline"
-
-# Install Xdebug for PHP debugging.
-run_script "Installing Xdebug..." "./steps/070_install_xdebug.sh"
-
 
 # Clone other repositories.
 run_script "Cloning my repositories to local..." "./steps/080_clone_github_repositories.sh"
