@@ -31,9 +31,6 @@ run_execute_script "Linking local dotfiles folder with github..." "./steps/040_l
 # Install tools and applications specified in the brewfile.
 run_execute_script "Installing tools + apps..." "brew bundle --file ./resources/brewfile"
 
-echo "Tools + apps are installed."
-print_with_newline
-
 # Clone other repositories.
 run_execute_script "Cloning my repositories to local..." "./steps/080_clone_github_repositories.sh"
 
