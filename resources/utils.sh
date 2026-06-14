@@ -91,7 +91,7 @@ ask_for_sudo() {
     # https://gist.github.com/cowboy/3118588
     (
         while true; do
-            sudo -n true
+            sudo -v
             sleep 60
             kill -0 "$$" || exit
         done
