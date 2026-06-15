@@ -71,7 +71,7 @@ ask_for_confirmation() {
 }
 
 ask_for_sudo() {
-    print_after_newline "Enter password for sudo privileges…" "print_in_blue"
+    print_after_newline "🔐 Enter password for sudo privileges…" "print_in_blue"
     print_with_newline
 
     # Update sudo timestamp until the script has finished

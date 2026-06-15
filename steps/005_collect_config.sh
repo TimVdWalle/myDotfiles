@@ -9,7 +9,6 @@ if [ -z "$IS_TESTING" ]; then
     read -r
     if answer_is_yes; then
         export IS_TESTING=true
-        print_success "Testing mode enabled"
     else
         export IS_TESTING=false
     fi
@@ -18,7 +17,6 @@ fi
 if [ -z "$GIT_EMAIL" ]; then
     ask_for_input "Git email:"
     export GIT_EMAIL=$REPLY
-    print_success "Email set: $GIT_EMAIL"
 fi
 
 # Try to detect the remote origin URL if it's already a git repo
@@ -32,7 +30,6 @@ if [ -n "$DETECTED_URL" ]; then
     read -r
     if answer_is_yes; then
         export DOTFILES_REMOTE=$DETECTED_URL
-        print_success "Remote set: $DOTFILES_REMOTE"
     fi
 fi
 
@@ -43,7 +40,6 @@ if [ -z "$DOTFILES_REMOTE" ]; then
         # Simple regex for git@github.com:user/repo.git or https://github.com/user/repo.git
         if [[ "$url" =~ ^(git@github\.com:|https://github\.com/)[a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+\.git$ ]]; then
             export DOTFILES_REMOTE=$url
-            print_success "Remote set: $DOTFILES_REMOTE"
             break
         else
             print_error "Invalid format (SSH or HTTPS required)"
