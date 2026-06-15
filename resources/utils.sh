@@ -443,11 +443,11 @@ show_spinner() {
         local time_str=$(printf "%02d:%02d" $(( elapsed / 60 )) $(( elapsed % 60 )))
         
         frameText=" [${FRAMES[$idx]}] $MSG ($time_str) "
-        # Print frame text.
-        printf "\r%s" "$frameText"
+        # Print frame text to stderr so it's not captured by variable assignment
+        printf "\r%s" "$frameText" >&2
         (( i++ ))
         sleep 0.2
-        tput el
+        tput el >&2
     done
     
     # Calculate final time
@@ -455,10 +455,10 @@ show_spinner() {
     local total_elapsed=$(( final_time - START_TIME ))
     local final_time_str=$(printf "%02d:%02d" $(( total_elapsed / 60 )) $(( total_elapsed % 60 )))
 
-    # Print one last time to ensure it finishes clean or is cleared
-    printf "\r"
-    tput el
+    # Print one last time to ensure it finishes clean or is cleared (to stderr)
+    printf "\r" >&2
+    tput el >&2
     
-    # Return the final time string so execute() can use it
+    # Return the final time string so execute() can use it (to stdout)
     echo "$final_time_str"
 }
