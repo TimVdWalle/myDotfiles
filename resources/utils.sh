@@ -104,7 +104,7 @@ ask_for_reboot() {
 }
 
 ask_to_continue() {
-    print_after_newline "Press any key to continue…" "print"
+    print_after_newline "Press any key to continue…" "print_in_blue"
     print_with_newline
     # Using 'read -r -k 1' to wait for a single character in zsh
     # or fallback to 'read -r -n 1' for bash compatibility if needed, 
