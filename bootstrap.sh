@@ -35,7 +35,6 @@ print_step 4 5 "Configuring Shell & Preferences"
 run_execute_script "Installing zsh etc..." "./steps/090_setup_shell.sh"
 run_execute_script "Loading macos settings..." "./steps/100_load_macos_preferences.sh"
 run_execute_script "Symlinking dotfiles..." "./steps/120_symlink_dotfiles.sh"
-run_execute_script "Installing snazzy theme ..." "./steps/130_install_shell_theme.sh"
 
 # Finish
 print_step 5 5 "Overview"
