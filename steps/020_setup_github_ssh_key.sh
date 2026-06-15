@@ -19,18 +19,13 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
 
     # Adding your SSH key to the ssh-agent
     # https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent
-    eval "$(ssh-agent -s)"
-
     mkdir -p ~/.ssh
     touch ~/.ssh/config
     if ! grep -q "id_ed25519" ~/.ssh/config; then
         print_info "Updating SSH config..."
         echo "Host *\n  AddKeysToAgent yes\n  UseKeychain yes\n  IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
-    else
-        print_success "SSH config already contains id_ed25519 entry."
     fi
-
-    ssh-add ~/.ssh/id_ed25519 --apple-use-keychain
+    execute "eval \"\$(ssh-agent -s)\" && ssh-add --apple-use-keychain ~/.ssh/id_ed25519" "Adding SSH key to agent"
 
     # Adding your SSH key to your GitHub account
     # https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
@@ -40,6 +35,7 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
     print_success "Copied to clipboard"
 
     print_warning "Halt: Please add the SSH key above to your GitHub account (https://github.com/settings/keys) before continuing."
+    ask_to_continue
     
     while true; do
         print_info "Checking GitHub connectivity..."

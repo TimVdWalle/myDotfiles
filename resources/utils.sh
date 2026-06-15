@@ -27,6 +27,14 @@ run_script() {
     log "$message"
     # shellcheck disable=SC2039
     source "$script_path"
+    local exit_code=$?
+    # shellcheck disable=SC2181
+    if [ $exit_code -eq 0 ]; then
+        print_success "$message"
+    else
+        print_error "$message"
+    fi
+    return $exit_code
 }
 
 run_execute_script() {

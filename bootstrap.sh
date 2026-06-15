@@ -21,7 +21,7 @@ source "./steps/005_collect_config.sh"
 # System Setup
 print_step 2 5 "System Setup"
 run_execute_script "Creating symlinks..." "./steps/010_symlink_folders.sh"
-run_execute_script "Setting ssh key for github..." "./steps/020_setup_github_ssh_key.sh"
+run_script "Setting up SSH key for GitHub..." "./steps/020_setup_github_ssh_key.sh"
 run_execute_script "Installing HomeBrew..." "./steps/030_install_homebrew.sh"
 run_execute_script "Linking local dotfiles folder with github..." "./steps/040_link_github.sh"
 
