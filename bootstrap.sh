@@ -7,14 +7,15 @@ source "./resources/utils-macos.sh"
 # Check os
 check_os
 
+
+# Collect configuration details upfront
+print_step 1 5 "Collecting configuration"
 # Confirm user intent before proceeding.
 confirm_install
 
 # Ask for sudo early to avoid multiple prompts
 ask_for_sudo
 
-# Collect configuration details upfront
-print_step 1 5 "Collecting configuration"
 source "./steps/005_collect_config.sh"
 
 # System Setup
