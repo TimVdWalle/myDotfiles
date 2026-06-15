@@ -167,7 +167,8 @@ execute() {
     # Show a spinner if the commands
     # require more time to complete.
 
-    show_spinner "$cmdsPID" "$CMDS" "$MSG"
+    local elapsed_time=""
+    elapsed_time=$(show_spinner "$cmdsPID" "$CMDS" "$MSG")
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -189,7 +190,7 @@ execute() {
 
     # Print output based on what happened.
 
-    print_result $exitCode "$MSG"
+    print_result $exitCode "$MSG" "$elapsed_time"
 
     if [ $exitCode -ne 0 ]; then
         if [ -s $ERR_FILE ]; then
@@ -266,9 +267,9 @@ print_in_cyan() {
 print_result() {
 
     if [ "$1" -eq 0 ]; then
-        print_success "$2"
+        print_success "$2" "$3"
     else
-        print_error "$2"
+        print_error "$2" "$3"
     fi
 
     return "$1"
@@ -284,6 +285,14 @@ print_with_newline() {
 }
 
 print_success() {
+    if [ -n "$2" ]; then
+        print_in_green "✅ $1 ($2)\n"
+    else
+        print_success_no_time "$1"
+    fi
+}
+
+print_success_no_time() {
     print_in_green "✅ $1\n"
 }
 
@@ -296,6 +305,14 @@ print_info() {
 }
 
 print_error() {
+    if [ -n "$2" ]; then
+        print_in_red "❌ $1 ($2)\n"
+    else
+        print_error_no_time "$1"
+    fi
+}
+
+print_error_no_time() {
     print_in_red "❌ $1\n"
 }
 
@@ -432,7 +449,16 @@ show_spinner() {
         sleep 0.2
         tput el
     done
+    
+    # Calculate final time
+    local final_time=$(date +%s)
+    local total_elapsed=$(( final_time - START_TIME ))
+    local final_time_str=$(printf "%02d:%02d" $(( total_elapsed / 60 )) $(( total_elapsed % 60 )))
+
     # Print one last time to ensure it finishes clean or is cleared
     printf "\r"
     tput el
+    
+    # Return the final time string so execute() can use it
+    echo "$final_time_str"
 }
