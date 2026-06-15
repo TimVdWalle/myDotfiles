@@ -3,7 +3,6 @@ source "./resources/utils.sh"
 source "./resources/utils-macos.sh"
 
 # Collect configuration details upfront
-print_info "Collecting configuration..."
 
 if [ -z "$IS_TESTING" ]; then
     print_question "Are you testing the script? (y/n)"

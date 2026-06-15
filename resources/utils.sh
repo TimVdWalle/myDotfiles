@@ -193,8 +193,10 @@ execute() {
 
     if [ $exitCode -ne 0 ]; then
         if [ -s $ERR_FILE ]; then
+            print_error "Command failed. Recent error output:"
             print_error_stream < "$ERR_FILE"
         else
+            print_warning "Command finished with warnings. Recent output:"
             print_warning_stream < "$OUT_FILE"
         fi
     fi
@@ -318,19 +320,70 @@ print_question() {
 print_step() {
     print_with_newline
     local step_num="$1"
-    local step_name="$2"
+    local total_steps="$2"
+    local step_name="$3"
     # Using a blue background with bold white text for steps
     printf "%b" \
         "$(tput bold 2> /dev/null)" \
         "$(tput setaf 7 2> /dev/null)" \
         "$(tput setab 4 2> /dev/null)" \
-        " 🚀 Step $step_num: $step_name " \
+        " 🚀 Step $step_num/$total_steps: $step_name " \
         "$(tput sgr0 2> /dev/null)"
     print_with_newline
 }
 
 print_after_newline() {
     $2 "$1"
+}
+
+print_table() {
+    local -r separator="|"
+    local -r padding=2
+
+    # Collect input lines into an array
+    local lines=()
+    while IFS= read -r line; do
+        [[ -z "$line" ]] && continue
+        lines+=("$line")
+    done
+
+    # Find max width for each column
+    local col1_max=0
+    local col2_max=0
+    local col3_max=0
+
+    local formatted_lines=()
+    for line in "${lines[@]}"; do
+        local c1=$(echo "$line" | cut -d'|' -f1 | xargs)
+        local c2=$(echo "$line" | cut -d'|' -f2 | xargs)
+        local c3=$(echo "$line" | cut -d'|' -f3 | xargs)
+        
+        formatted_lines+=("$c1|$c2|$c3")
+        
+        (( ${#c1} > col1_max )) && col1_max=${#c1}
+        (( ${#c2} > col2_max )) && col2_max=${#c2}
+        (( ${#c3} > col3_max )) && col3_max=${#c3}
+    done
+
+    local total_width=$(( col1_max + col2_max + col3_max + 8 ))
+    local line_border=$(printf "%${total_width}s" | tr " " "-")
+
+    print_with_newline "$line_border"
+    for line in "${formatted_lines[@]}"; do
+        local c1=$(echo "$line" | cut -d'|' -f1)
+        local c2=$(echo "$line" | cut -d'|' -f2)
+        local c3=$(echo "$line" | cut -d'|' -f3)
+        
+        # We use simple printf with padding
+        printf "%s %-${col1_max}s %s %-${col2_max}s %s %-${col3_max}s %s\n" \
+            "$separator" "$c1" "$separator" "$c2" "$separator" "$c3" "$separator"
+        
+        # Add a separator after header
+        if [[ "$c1" == "Tool" ]]; then
+             print_with_newline "$line_border"
+        fi
+    done
+    print_with_newline "$line_border"
 }
 
 set_trap() {
@@ -358,22 +411,28 @@ show_spinner() {
     local -r CMDS="$2"
     local -r MSG="$3"
     local -r PID="$1"
+    local -r START_TIME=$(date +%s)
 
     local i=0
     local frameText=""
 
     # Display spinner while the commands are being executed.
     while kill -0 "$PID" &>/dev/null; do
-        tput sc
         # In Zsh, strings are 1-indexed.
         # Use (( ... )) for arithmetic and calculate the index.
         local idx=$(( (i % NUMBER_OR_FRAMES) + 1 ))
-        frameText="[${FRAMES[$idx]}] $MSG"
+        local current_time=$(date +%s)
+        local elapsed=$(( current_time - START_TIME ))
+        local time_str=$(printf "%02d:%02d" $(( elapsed / 60 )) $(( elapsed % 60 )))
+        
+        frameText=" [${FRAMES[$idx]}] $MSG ($time_str) "
         # Print frame text.
-        printf "%s" "$frameText"
+        printf "\r%s" "$frameText"
         (( i++ ))
         sleep 0.2
-        tput rc
         tput el
     done
+    # Print one last time to ensure it finishes clean or is cleared
+    printf "\r"
+    tput el
 }
