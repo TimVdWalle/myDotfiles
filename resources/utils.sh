@@ -8,11 +8,9 @@ check_os() {
 }
 
 confirm_install(){
-  ask_for_confirmation "This script will set up your Mac. Continue?"
+  ask_for_confirmation "Ready to set up your Mac?"
   if ! answer_is_yes; then
       exit 1
-  else
-    log "Setting up your Mac..."
   fi
 }
 
@@ -73,10 +71,7 @@ ask_for_confirmation() {
 }
 
 ask_for_sudo() {
-    msg="Since this script will be altering your computer settings, "
-    msg+="it's gonna need sudo privileges. Please enter your password…"
-
-    print_after_newline "$msg" "print_in_purple"
+    print_after_newline "Enter password for sudo privileges…" "print_in_blue"
     print_with_newline
 
     # Update sudo timestamp until the script has finished
@@ -331,7 +326,7 @@ print_warning_stream() {
 }
 
 print_question() {
-    print_in_purple "❓ $1 "
+    print_in_blue "❓ $1 "
 }
 
 print_step() {
