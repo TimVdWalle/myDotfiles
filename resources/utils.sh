@@ -78,7 +78,7 @@ ask_for_confirmation() {
 }
 
 ask_for_sudo() {
-    print_after_newline "🔐 Enter password for sudo privileges…" "print_in_blue"
+    print_after_newline "  🔐 Enter password for sudo privileges…" "print_in_blue"
 
     # Update sudo timestamp until the script has finished
     sudo -v
@@ -93,7 +93,7 @@ ask_for_sudo() {
 }
 
 ask_for_reboot() {
-    print_after_newline "Do you want to restart?" "ask_for_confirmation"
+    print_after_newline "  Do you want to restart?" "ask_for_confirmation"
 
     if answer_is_yes; then
         sudo shutdown -r now &> /dev/null
@@ -101,7 +101,7 @@ ask_for_reboot() {
 }
 
 ask_to_continue() {
-    print_after_newline "Press any key to continue…" "print_in_blue"
+    print_after_newline "  Press any key to continue…" "print_in_blue"
     # Using 'read -r -k 1' to wait for a single character in zsh
     # or fallback to 'read -r -n 1' for bash compatibility if needed, 
     # but we aim for zsh.
@@ -286,52 +286,52 @@ print_with_newline() {
 
 print_success() {
   if [ -n "$2" ]; then
-    print_in_green "✅ $1 ($2)\n"
+    print_in_green "  ✅ $1 ($2)\n"
   else
     print_success_no_time "$1"
   fi
 }
 
 print_success_no_time() {
-  print_in_green "✅ $1\n"
+  print_in_green "  ✅ $1\n"
 }
 
 print_warning() {
-  print_in_yellow "⚠️  $1\n"
+  print_in_yellow "  ⚠️  $1\n"
 }
 
 print_info() {
-  print_in_blue "ℹ️  $1\n"
+  print_in_blue "  ℹ️  $1\n"
 }
 
 print_error() {
   if [ -n "$2" ]; then
-    print_in_red "❌ $1 ($2)\n"
+    print_in_red "  ❌ $1 ($2)\n"
   else
     print_error_no_time "$1"
   fi
 }
 
 print_error_no_time() {
-  print_in_red "❌ $1\n"
+  print_in_red "  ❌ $1\n"
 }
 
 print_error_stream() {
     while read -r line; do
-        print_in_red "↳ ERROR: $line\n"
+        print_in_red "  ↳ ERROR: $line\n"
     done
     print_with_newline
 }
 
 print_warning_stream() {
     while read -r line; do
-        print_in_yellow "↳ $line\n"
+        print_in_yellow "  ↳ $line\n"
     done
     print_with_newline
 }
 
 print_question() {
-  print_in_blue "❓ $1"
+  print_in_blue "  ❓ $1"
 }
 
 print_step() {
@@ -384,7 +384,7 @@ print_table() {
     done
 
     local total_width=$(( col1_max + col2_max + col3_max + 8 ))
-    local line_border=$(printf "%${total_width}s" | tr " " "-")
+    local line_border=$(printf "  %${total_width}s" | tr " " "-")
 
     print_with_newline "$line_border"
     for line in "${formatted_lines[@]}"; do
@@ -393,7 +393,7 @@ print_table() {
         local c3=$(echo "$line" | cut -d'|' -f3)
         
         # We use simple printf with padding
-        printf "%s %-${col1_max}s %s %-${col2_max}s %s %-${col3_max}s %s\n" \
+        printf "  %s %-${col1_max}s %s %-${col2_max}s %s %-${col3_max}s %s\n" \
             "$separator" "$c1" "$separator" "$c2" "$separator" "$c3" "$separator"
         
         # Add a separator after header
@@ -443,7 +443,7 @@ show_spinner() {
         local elapsed=$(( current_time - START_TIME ))
         local time_str=$(printf "%02d:%02d" $(( elapsed / 60 )) $(( elapsed % 60 )))
         
-        frameText=" [${FRAMES[$idx]}] $MSG ($time_str) "
+        frameText="   [${FRAMES[$idx]}] $MSG ($time_str) "
         # Print frame text to stderr so it's not captured by variable assignment
         printf "\r%s" "$frameText" >&2
         (( i++ ))

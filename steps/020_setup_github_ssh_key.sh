@@ -26,14 +26,20 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
 
     # Adding your SSH key to your GitHub account
     # https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
-    print_info "Public key copied to clipboard."
+    print_info "Your public SSH key:"
+    print ""
+    cat ~/.ssh/id_ed25519.pub
+    print ""
+    
+    pbcopy < ~/.ssh/id_ed25519.pub
+    print_info "Public key copied to clipboard (using 'pbcopy < ~/.ssh/id_ed25519.pub')."
     print_info "Paste it here: https://github.com/settings/keys"
     
-    print_warning "Halt: Add the key to GitHub before continuing."
+    print_info "Please add the key to your GitHub account to continue."
     ask_to_continue
     
     while true; do
-        print_in_blue "ℹ️  Verifying GitHub authentication... "
+        print_in_blue "  ℹ️  Verifying GitHub authentication... "
         # ssh -T returns 1 on success for GitHub (it greets you but doesn't provide shell access)
         if ssh -T -o ConnectTimeout=5 -o StrictHostKeyChecking=no git@github.com 2>&1 | grep -q "successfully authenticated"; then
             print_in_green "success!\n"
