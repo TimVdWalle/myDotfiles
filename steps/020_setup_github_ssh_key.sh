@@ -58,7 +58,7 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
         fi
     done
 else
-    print_success "SSH key already exists"
+    print_info "SSH key already exists"
     if ! ssh -T -o ConnectTimeout=5 -o StrictHostKeyChecking=no git@github.com 2>&1 | grep -q "successfully authenticated"; then
         print_warning "Auth failed. Please check your GitHub settings."
         ask_to_continue

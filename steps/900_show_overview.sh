@@ -14,14 +14,14 @@ check_tool() {
     local cmd="$1"
     local name="$2"
     local version_cmd="$3"
-    local status="❌"
-    local version="not installed"
+    local tool_status="❌"
+    local tool_version="not installed"
 
     if command -v "$cmd" &> /dev/null; then
-        status="✅"
-        version=$(eval "$version_cmd" 2>/dev/null)
+        tool_status="✅"
+        tool_version=$(eval "$version_cmd" 2>/dev/null)
     fi
-    echo "$name | $status | $version"
+    echo "$name | $tool_status | $tool_version"
 }
 
 summary_data="Tool | Status | Version

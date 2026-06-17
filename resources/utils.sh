@@ -177,9 +177,11 @@ execute() {
     # If the background process asks for sudo, it might fail in execute
     # so we check if the exit code is 1 and if the error log contains sudo related errors
     if [ $exitCode -ne 0 ] && (grep -qi "sudo" "$ERR_FILE" 2>/dev/null || grep -qi "password" "$ERR_FILE" 2>/dev/null || grep -q "Sorry, try again." "$ERR_FILE" 2>/dev/null); then
+        # Use tput to ensure we are at the beginning of the line
+        printf "\r" >&2
+        tput el >&2
         print_warning "Interactive input or sudo password required for: $MSG"
         # We try to run it in the foreground now.
-        # We use 'eval' but we need to make sure we don't double-escape if $CMDS was complex
         eval "$CMDS"
         exitCode=$?
     fi
