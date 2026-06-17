@@ -27,16 +27,17 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
     # Adding your SSH key to your GitHub account
     # https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
     print_info "Your public SSH key:"
-    print ""
-    cat ~/.ssh/id_ed25519.pub
-    print ""
+    sed 's/^/  /' ~/.ssh/id_ed25519.pub
     
     pbcopy < ~/.ssh/id_ed25519.pub
     print_info "Public key copied to clipboard (using 'pbcopy < ~/.ssh/id_ed25519.pub')."
     print_info "Paste it here: https://github.com/settings/keys"
     
     print_info "Please add the key to your GitHub account to continue."
-    ask_to_continue
+    print_in_blue "  Press any key to continue…"
+    # Using 'read -r -k 1' to wait for a single character in zsh
+    read -r -k 1
+    print_with_newline
     
     while true; do
         print_in_blue "  ℹ️  Verifying GitHub authentication... "

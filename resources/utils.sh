@@ -78,10 +78,12 @@ ask_for_confirmation() {
 }
 
 ask_for_sudo() {
-    print_after_newline "  🔐 Enter password for sudo privileges…" "print_in_blue"
+    print_in_blue "  🔐 Enter password for sudo privileges…"
+    print_with_newline
 
     # Update sudo timestamp until the script has finished
-    sudo -v
+    # We use -p to set a custom prompt that includes indentation
+    sudo -p "  Password: " -v
     while true; do
         sudo -n true
         sleep 60
