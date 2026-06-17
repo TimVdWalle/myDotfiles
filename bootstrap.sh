@@ -39,4 +39,4 @@ run_execute_script "Symlinking dotfiles..." "./steps/120_symlink_dotfiles.sh"
 
 # Finish
 print_step 5 5 "Overview"
-run_execute_script "Showing installation overview:" "./steps/900_show_overview.sh"
+run_script "Showing installation overview:" "./steps/900_show_overview.sh"

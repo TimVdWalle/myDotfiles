@@ -83,7 +83,7 @@ ask_for_sudo() {
 
     # Update sudo timestamp until the script has finished
     # We use -p to set a custom prompt that includes indentation
-    sudo -p "  Password: " -v
+    sudo -p "  🔐 Password: " -v
     while true; do
         sudo -n true
         sleep 60
@@ -182,7 +182,7 @@ execute() {
 
     # If the background process asks for sudo, it might fail in execute
     # so we check if the exit code is 1 and if the error log contains sudo related errors
-    if [ $exitCode -ne 0 ] && grep -q "sudo: a password is required" "$ERR_FILE" 2>/dev/null; then
+    if [ $exitCode -ne 0 ] && (grep -q "sudo: a password is required" "$ERR_FILE" 2>/dev/null || grep -q "Sorry, try again." "$ERR_FILE" 2>/dev/null); then
         print_warning "Sudo password required for: $MSG"
         eval "$CMDS"
         exitCode=$?

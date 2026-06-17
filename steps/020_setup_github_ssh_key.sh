@@ -27,7 +27,7 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
     # Adding your SSH key to your GitHub account
     # https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
     print_info "Your public SSH key:"
-    sed 's/^/  /' ~/.ssh/id_ed25519.pub
+    sed 's/^/  ↳ /' ~/.ssh/id_ed25519.pub
     
     pbcopy < ~/.ssh/id_ed25519.pub
     print_info "Public key copied to clipboard (using 'pbcopy < ~/.ssh/id_ed25519.pub')."
