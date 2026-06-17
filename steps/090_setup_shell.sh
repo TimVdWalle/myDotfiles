@@ -32,3 +32,27 @@ if ! cmd_exists "antigen" && [ ! -f "/opt/homebrew/bin/antigen" ] && [ ! -f "/us
 fi
 
 
+
+# Initial setup for asdf if installed via homebrew
+if [ -f "$HOME/.asdf/asdf.sh" ]; then
+    source "$HOME/.asdf/asdf.sh"
+elif [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+    source /opt/homebrew/opt/asdf/libexec/asdf.sh
+elif [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
+    source /usr/local/opt/asdf/libexec/asdf.sh
+fi
+
+if cmd_exists "asdf"; then
+    # Add asdf to .zshrc if not present
+    if ! grep -q "asdf.sh" "$HOME/.zshrc"; then
+        print_info "Adding asdf to .zshrc"
+        echo "\n# asdf version manager" >> "$HOME/.zshrc"
+        if [ -f "$HOME/.asdf/asdf.sh" ]; then
+             echo "source $HOME/.asdf/asdf.sh" >> "$HOME/.zshrc"
+        elif [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+             echo "source /opt/homebrew/opt/asdf/libexec/asdf.sh" >> "$HOME/.zshrc"
+        elif [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
+             echo "source /usr/local/opt/asdf/libexec/asdf.sh" >> "$HOME/.zshrc"
+        fi
+    fi
+fi

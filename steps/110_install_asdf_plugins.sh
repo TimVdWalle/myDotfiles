@@ -3,11 +3,16 @@ source "./resources/utils.sh"
 source "./resources/utils-macos.sh"
 
 # Ensure asdf is available in the current subshell
-if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+if [ -f "$HOME/.asdf/asdf.sh" ]; then
+    source "$HOME/.asdf/asdf.sh"
+elif [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
     source /opt/homebrew/opt/asdf/libexec/asdf.sh
 elif [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
     source /usr/local/opt/asdf/libexec/asdf.sh
 fi
+
+# Ensure asdf shims are in PATH
+export PATH="$HOME/.asdf/shims:$PATH"
 
 if ! cmd_exists "asdf"; then
     print_error "asdf command not found. Please ensure it is installed via Homebrew."

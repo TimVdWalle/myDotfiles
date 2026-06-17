@@ -384,9 +384,9 @@ print_table() {
     done
 
     local total_width=$(( col1_max + col2_max + col3_max + 8 ))
-    local line_border=$(printf "  %${total_width}s" | tr " " "-")
+    local line_border=$(printf "%${total_width}s" | tr " " "-")
 
-    print_with_newline "$line_border"
+    print_with_newline "  $line_border"
     for line in "${formatted_lines[@]}"; do
         local c1=$(echo "$line" | cut -d'|' -f1)
         local c2=$(echo "$line" | cut -d'|' -f2)
@@ -398,10 +398,10 @@ print_table() {
         
         # Add a separator after header
         if [[ "$c1" == "Tool" ]]; then
-             print_with_newline "$line_border"
+             print_with_newline "  $line_border"
         fi
     done
-    print_with_newline "$line_border"
+    print_with_newline "  $line_border"
     print_with_newline
 }
 

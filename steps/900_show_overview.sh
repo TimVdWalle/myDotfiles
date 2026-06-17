@@ -3,11 +3,16 @@ source "./resources/utils.sh"
 source "./resources/utils-macos.sh"
 
 # Ensure asdf is available in the current subshell
-if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
-    source /opt/homebrew/opt/asdf/libexec/asdf.sh
-elif [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
-    source /usr/local/opt/asdf/libexec/asdf.sh
+if [ -f "$HOME/.asdf/asdf.sh" ]; then
+    source "$HOME/.asdf/asdf.sh"
+elif [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ]; then
+    source "/opt/homebrew/opt/asdf/libexec/asdf.sh"
+elif [ -f "/usr/local/opt/asdf/libexec/asdf.sh" ]; then
+    source "/usr/local/opt/asdf/libexec/asdf.sh"
 fi
+
+# Ensure asdf shims are in PATH
+export PATH="$HOME/.asdf/shims:$PATH"
 
 # Prepare summary table data
 check_tool() {
@@ -32,7 +37,6 @@ $(check_tool "node" "Node" "node -v")
 $(check_tool "ruby" "Ruby" "ruby -v | head -n 1 | awk '{print \$1\" \"\$2}'")
 $(check_tool "python3" "Python" "python3 --version | awk '{print \$2}'")"
 
-print_info "Installation Summary:"
 echo "$summary_data" | print_table
 
 print_success "Installation complete!"
