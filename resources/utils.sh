@@ -103,7 +103,7 @@ ask_for_reboot() {
 }
 
 ask_to_continue() {
-    print_after_newline "  Press any key to continue…" "print_in_blue"
+    print_after_newline "  ⌨️  Press any key to continue…" "print_in_blue"
     # Using 'read -r -k 1' to wait for a single character in zsh
     # or fallback to 'read -r -n 1' for bash compatibility if needed, 
     # but we aim for zsh.
@@ -182,8 +182,10 @@ execute() {
 
     # If the background process asks for sudo, it might fail in execute
     # so we check if the exit code is 1 and if the error log contains sudo related errors
-    if [ $exitCode -ne 0 ] && (grep -q "sudo: a password is required" "$ERR_FILE" 2>/dev/null || grep -q "Sorry, try again." "$ERR_FILE" 2>/dev/null); then
-        print_warning "Sudo password required for: $MSG"
+    if [ $exitCode -ne 0 ] && (grep -qi "sudo" "$ERR_FILE" 2>/dev/null || grep -qi "password" "$ERR_FILE" 2>/dev/null || grep -q "Sorry, try again." "$ERR_FILE" 2>/dev/null); then
+        print_warning "Interactive input or sudo password required for: $MSG"
+        # We try to run it in the foreground now.
+        # We use 'eval' but we need to make sure we don't double-escape if $CMDS was complex
         eval "$CMDS"
         exitCode=$?
     fi
@@ -303,7 +305,7 @@ print_warning() {
 }
 
 print_info() {
-  print_in_blue "  ℹ️  $1\n"
+  print_in_blue "  🔹 $1\n"
 }
 
 print_error() {
@@ -374,9 +376,9 @@ print_table() {
 
     local formatted_lines=()
     for line in "${lines[@]}"; do
-        local c1=$(echo "$line" | cut -d'|' -f1 | xargs)
-        local c2=$(echo "$line" | cut -d'|' -f2 | xargs)
-        local c3=$(echo "$line" | cut -d'|' -f3 | xargs)
+        local c1=$(echo "$line" | cut -d'|' -f1 | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+        local c2=$(echo "$line" | cut -d'|' -f2 | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+        local c3=$(echo "$line" | cut -d'|' -f3 | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
         
         formatted_lines+=("$c1|$c2|$c3")
         
