@@ -68,7 +68,7 @@ answer_is_no() {
 }
 
 ask_for_input() {
-    print_question "$1"
+    print_question "$1 "
     read -r
 }
 
@@ -90,7 +90,8 @@ ask_for_sudo() {
         kill -0 "$$" || exit
     done &
     SUDO_PID=$!
-    trap 'kill $SUDO_PID &> /dev/null' EXIT
+    set_trap "EXIT" "kill $SUDO_PID &> /dev/null; kill_all_subprocesses"
+    set_trap "INT" "kill $SUDO_PID &> /dev/null; kill_all_subprocesses; exit 1"
 }
 
 ask_for_reboot() {
@@ -134,7 +135,7 @@ kill_all_subprocesses() {
     local i=""
 
     for i in $(jobs -p); do
-        kill "$i"
+        kill -TERM -"$i" &> /dev/null || kill -TERM "$i" &> /dev/null
         wait "$i" &> /dev/null
     done
 }
@@ -154,6 +155,7 @@ execute() {
     # also end all its subprocesses.
 
     set_trap "EXIT" "kill_all_subprocesses"
+    set_trap "INT" "kill_all_subprocesses; exit 1"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -289,34 +291,34 @@ print_with_newline() {
 
 print_success() {
     if [ -n "$2" ]; then
-        print_in_green "✅ $1 ($2)\n"
+        print_in_green "  ✅ $1 ($2)\n"
     else
         print_success_no_time "$1"
     fi
 }
 
 print_success_no_time() {
-    print_in_green "✅ $1\n"
+    print_in_green "  ✅ $1\n"
 }
 
 print_warning() {
-    print_in_yellow "⚠️  $1\n"
+    print_in_yellow "  ⚠️  $1\n"
 }
 
 print_info() {
-    print_in_cyan "ℹ️  $1\n"
+    print_in_blue "  ℹ️  $1\n"
 }
 
 print_error() {
     if [ -n "$2" ]; then
-        print_in_red "❌ $1 ($2)\n"
+        print_in_red "  ❌ $1 ($2)\n"
     else
         print_error_no_time "$1"
     fi
 }
 
 print_error_no_time() {
-    print_in_red "❌ $1\n"
+    print_in_red "  ❌ $1\n"
 }
 
 print_error_stream() {
@@ -334,7 +336,7 @@ print_warning_stream() {
 }
 
 print_question() {
-    print_in_blue "❓ $1 "
+    print_in_blue "  ❓ $1"
 }
 
 print_step() {
@@ -347,7 +349,7 @@ print_step() {
         "$(tput bold 2> /dev/null)" \
         "$(tput setaf 7 2> /dev/null)" \
         "$(tput setab 4 2> /dev/null)" \
-        " 🚀 Step $step_num/$total_steps: $step_name " \
+        " STEP $step_num/$total_steps: $step_name " \
         "$(tput sgr0 2> /dev/null)"
     print_with_newline
 }
