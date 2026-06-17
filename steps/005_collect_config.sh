@@ -5,8 +5,7 @@ source "./resources/utils-macos.sh"
 # Collect configuration details upfront
 
 if [ -z "$IS_TESTING" ]; then
-    print_question "Testing mode? (skips slow steps) (y/n)"
-    read -r
+    ask_for_confirmation "Testing mode? (skips slow steps)"
     if answer_is_yes; then
         export IS_TESTING=true
     else
@@ -26,8 +25,7 @@ if is_git_repository; then
 fi
 
 if [ -n "$DETECTED_URL" ]; then
-    print_question "Use $DETECTED_URL? (for dotfiles sync) (y/n)"
-    read -r
+    ask_for_confirmation "Use $DETECTED_URL? (for dotfiles sync)"
     if answer_is_yes; then
         export DOTFILES_REMOTE=$DETECTED_URL
     fi

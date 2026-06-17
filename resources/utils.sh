@@ -68,19 +68,17 @@ answer_is_no() {
 }
 
 ask_for_input() {
-    print_question "$1 "
-    read -r
+  print_question "$1 "
+  read -r
 }
 
 ask_for_confirmation() {
-    print_question "$1 (y/n) "
-    #read -r -n 1
-    read -r
+  print_question "$1 (y/n) "
+  read -r
 }
 
 ask_for_sudo() {
     print_after_newline "🔐 Enter password for sudo privileges…" "print_in_blue"
-    print_with_newline
 
     # Update sudo timestamp until the script has finished
     sudo -v
@@ -100,13 +98,10 @@ ask_for_reboot() {
     if answer_is_yes; then
         sudo shutdown -r now &> /dev/null
     fi
-
-    print_with_newline
 }
 
 ask_to_continue() {
     print_after_newline "Press any key to continue…" "print_in_blue"
-    print_with_newline
     # Using 'read -r -k 1' to wait for a single character in zsh
     # or fallback to 'read -r -n 1' for bash compatibility if needed, 
     # but we aim for zsh.
@@ -290,35 +285,35 @@ print_with_newline() {
 }
 
 print_success() {
-    if [ -n "$2" ]; then
-        print_in_green "  ✅ $1 ($2)\n"
-    else
-        print_success_no_time "$1"
-    fi
+  if [ -n "$2" ]; then
+    print_in_green "✅ $1 ($2)\n"
+  else
+    print_success_no_time "$1"
+  fi
 }
 
 print_success_no_time() {
-    print_in_green "  ✅ $1\n"
+  print_in_green "✅ $1\n"
 }
 
 print_warning() {
-    print_in_yellow "  ⚠️  $1\n"
+  print_in_yellow "⚠️  $1\n"
 }
 
 print_info() {
-    print_in_blue "  ℹ️  $1\n"
+  print_in_blue "ℹ️  $1\n"
 }
 
 print_error() {
-    if [ -n "$2" ]; then
-        print_in_red "  ❌ $1 ($2)\n"
-    else
-        print_error_no_time "$1"
-    fi
+  if [ -n "$2" ]; then
+    print_in_red "❌ $1 ($2)\n"
+  else
+    print_error_no_time "$1"
+  fi
 }
 
 print_error_no_time() {
-    print_in_red "  ❌ $1\n"
+  print_in_red "❌ $1\n"
 }
 
 print_error_stream() {
@@ -336,7 +331,7 @@ print_warning_stream() {
 }
 
 print_question() {
-    print_in_blue "  ❓ $1"
+  print_in_blue "❓ $1"
 }
 
 print_step() {
@@ -355,6 +350,7 @@ print_step() {
 }
 
 print_after_newline() {
+    print_with_newline
     $2 "$1"
 }
 

@@ -33,14 +33,15 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
     ask_to_continue
     
     while true; do
-        print_in_blue "  ℹ️  Verifying GitHub authentication... "
+        print_in_blue "ℹ️  Verifying GitHub authentication... "
         # ssh -T returns 1 on success for GitHub (it greets you but doesn't provide shell access)
         if ssh -T -o ConnectTimeout=5 -o StrictHostKeyChecking=no git@github.com 2>&1 | grep -q "successfully authenticated"; then
             print_in_green "success!\n"
             break
         else
             print_in_red "failed\n"
-            print_question "Try again? (y) or wait 10s to retry automatically..."
+            print_question "Try again? (y) or wait 10s to retry automatically... "
+            # shellcheck disable=SC2162
             read -r -t 10 response < /dev/tty
             if [[ "$response" != "y" ]]; then
                 print_with_newline
