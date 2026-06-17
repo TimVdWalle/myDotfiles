@@ -28,12 +28,6 @@ run_script() {
     # shellcheck disable=SC2039
     source "$script_path"
     local exit_code=$?
-    # shellcheck disable=SC2181
-    if [ $exit_code -eq 0 ]; then
-        print_success "$message"
-    else
-        print_error "$message"
-    fi
     return $exit_code
 }
 
@@ -406,6 +400,7 @@ print_table() {
         fi
     done
     print_with_newline "$line_border"
+    print_with_newline
 }
 
 set_trap() {
@@ -461,9 +456,10 @@ show_spinner() {
     local final_time_str=$(printf "%02d:%02d" $(( total_elapsed / 60 )) $(( total_elapsed % 60 )))
 
     # Print one last time to ensure it finishes clean or is cleared (to stderr)
+    # Use printf "\r" and tput el to clear the line before return
     printf "\r" >&2
     tput el >&2
     
     # Return the final time string so execute() can use it (to stdout)
-    echo "$final_time_str"
+    printf "%s" "$final_time_str"
 }

@@ -18,8 +18,8 @@ ask_for_sudo
 
 source "./steps/005_collect_config.sh"
 
-# System Setup
-print_step 2 5 "System Setup"
+# System & GitHub Setup
+print_step 2 5 "System & GitHub Setup"
 run_execute_script "Creating symlinks..." "./steps/010_symlink_folders.sh"
 run_script "Setting up SSH key for GitHub..." "./steps/020_setup_github_ssh_key.sh"
 run_execute_script "Installing HomeBrew..." "./steps/030_install_homebrew.sh"
@@ -39,4 +39,4 @@ run_execute_script "Symlinking dotfiles..." "./steps/120_symlink_dotfiles.sh"
 
 # Finish
 print_step 5 5 "Overview"
-run_script "Showing installation overview:" "./steps/900_show_overview.sh"
+source "./steps/900_show_overview.sh"
