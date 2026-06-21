@@ -9,7 +9,14 @@ elif [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
     source /opt/homebrew/opt/asdf/libexec/asdf.sh
 elif [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
     source /usr/local/opt/asdf/libexec/asdf.sh
+elif [ -f /opt/homebrew/opt/asdf/asdf.sh ]; then
+    source /opt/homebrew/opt/asdf/asdf.sh
+elif [ -f /usr/local/opt/asdf/asdf.sh ]; then
+    source /usr/local/opt/asdf/asdf.sh
 fi
+
+# Ensure Homebrew and asdf are in PATH
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 # Ensure asdf shims are in PATH
 export PATH="$HOME/.asdf/shims:$PATH"
@@ -32,7 +39,7 @@ for plugin in "${plugins[@]}"; do
         export RUBY_CONFIGURE_OPTS="--with-libyaml-dir=$(brew --prefix libyaml) --with-openssl-dir=$(brew --prefix openssl) --with-readline-dir=$(brew --prefix readline) --with-gmp-dir=$(brew --prefix gmp)"
     fi
     execute "asdf install $plugin latest" "Installing latest $plugin"
-    execute "asdf global $plugin latest" "Setting global $plugin to latest"
+    execute "asdf set -u $plugin latest" "Setting global $plugin to latest"
     asdf reshim
 done
 

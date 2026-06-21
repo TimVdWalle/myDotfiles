@@ -4,6 +4,10 @@ echo "Loading utils..."
 source "./resources/utils.sh"
 source "./resources/utils-macos.sh"
 
+# Set up log file
+LOG_FILE="./install.log"
+echo "--- Installation started at $(date) ---" > "$LOG_FILE"
+
 # Check os
 check_os
 

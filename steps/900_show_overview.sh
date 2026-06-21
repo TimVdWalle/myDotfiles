@@ -9,13 +9,22 @@ elif [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ]; then
     source "/opt/homebrew/opt/asdf/libexec/asdf.sh"
 elif [ -f "/usr/local/opt/asdf/libexec/asdf.sh" ]; then
     source "/usr/local/opt/asdf/libexec/asdf.sh"
+elif [ -f "/opt/homebrew/opt/asdf/asdf.sh" ]; then
+    source "/opt/homebrew/opt/asdf/asdf.sh"
+elif [ -f "/usr/local/opt/asdf/asdf.sh" ]; then
+    source "/usr/local/opt/asdf/asdf.sh"
 fi
+
+# Ensure Homebrew and asdf are in PATH
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 # Ensure asdf shims are in PATH
 export PATH="$HOME/.asdf/shims:$PATH"
 
 # Trigger asdf to use the installed versions in this shell
-asdf reshim
+if cmd_exists "asdf"; then
+    asdf reshim
+fi
 
 # Prepare summary table data
 check_tool() {
@@ -27,7 +36,11 @@ check_tool() {
 
     if command -v "$cmd" &> /dev/null; then
         tool_status="✅"
-        tool_version=$(eval "$version_cmd" 2>/dev/null)
+        # Combine stdout and stderr, then take the first non-empty line
+        tool_version=$(eval "$version_cmd" 2>&1 | grep -v "No version is set" | head -n 1 | xargs)
+        if [ -z "$tool_version" ]; then
+            tool_version="installed"
+        fi
     fi
     echo "$name | $tool_status | $tool_version"
 }
@@ -37,9 +50,14 @@ $(check_tool "zsh" "Shell" "echo $SHELL")
 $(check_tool "brew" "Homebrew" "brew --version | head -n 1")
 $(check_tool "asdf" "asdf" "asdf --version")
 $(check_tool "node" "Node" "node -v")
-$(check_tool "ruby" "Ruby" "ruby -v | head -n 1 | awk '{print \$1\" \"\$2}'")
-$(check_tool "python3" "Python" "python3 --version | awk '{print \$2}'")"
+$(check_tool "ruby" "Ruby" "ruby -v")
+$(check_tool "python3" "Python" "python3 --version")"
 
 echo "$summary_data" | print_table
+
+if [ -n "$LOG_FILE" ]; then
+    print_with_newline
+    print_info "Detailed logs are available at: $LOG_FILE"
+fi
 
 print_success "Installation complete!"
