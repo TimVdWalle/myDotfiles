@@ -14,17 +14,7 @@ if [ -f "$HOME/.asdf/asdf.sh" ]; then
     source "$HOME/.asdf/asdf.sh"
 elif [ -n "$HOMEBREW_PREFIX" ] && [ -f "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]; then
     source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
-elif [ -n "$HOMEBREW_PREFIX" ] && [ -f "$HOMEBREW_PREFIX/opt/asdf/asdf.sh" ]; then
-    source "$HOMEBREW_PREFIX/opt/asdf/asdf.sh"
 fi
-
-# Fallback for asdf shims if asdf.sh is not found or didn't add them
-if [ -d "$HOME/.asdf/shims" ]; then
-    export PATH="$HOME/.asdf/shims:$PATH"
-fi
-
-# Ensure /usr/local/bin and /opt/homebrew/bin are in PATH for asdf and brew
-export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"

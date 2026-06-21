@@ -25,15 +25,6 @@ run_script() {
     local message="$1"
     local script_path="$2"
     log "$message"
-
-    # Log results to a file if LOG_FILE is defined
-    if [ -n "$LOG_FILE" ]; then
-        echo "------------------------------------------------------------" >> "$LOG_FILE"
-        echo "Source Script: $script_path" >> "$LOG_FILE"
-        echo "Timestamp: $(date +%Y-%m-%d\ %H:%M:%S)" >> "$LOG_FILE"
-        echo "------------------------------------------------------------" >> "$LOG_FILE"
-    fi
-
     # shellcheck disable=SC2039
     source "$script_path"
     local exit_code=$?
@@ -182,24 +173,6 @@ execute() {
 
     wait "$cmdsPID" &> /dev/null
     exitCode=$?
-
-    # Log results to a file if LOG_FILE is defined
-    if [ -n "$LOG_FILE" ]; then
-        {
-            echo "------------------------------------------------------------"
-            echo "Step: $MSG"
-            echo "Command: $CMDS"
-            echo "Exit Code: $exitCode"
-            echo "Timestamp: $(date +%Y-%m-%d\ %H:%M:%S)"
-            echo "------------------------------------------------------------"
-            echo "STDOUT:"
-            cat "$OUT_FILE"
-            echo ""
-            echo "STDERR:"
-            cat "$ERR_FILE"
-            echo ""
-        } >> "$LOG_FILE"
-    fi
 
     # If the background process asks for sudo, it might fail in execute
     # so we check if the exit code is 1 and if the error log contains sudo related errors
