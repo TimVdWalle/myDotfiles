@@ -33,5 +33,6 @@ for plugin in "${plugins[@]}"; do
     fi
     execute "asdf install $plugin latest" "Installing latest $plugin"
     execute "asdf global $plugin latest" "Setting global $plugin to latest"
+    asdf reshim
 done
 

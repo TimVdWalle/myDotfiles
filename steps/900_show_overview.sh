@@ -14,6 +14,9 @@ fi
 # Ensure asdf shims are in PATH
 export PATH="$HOME/.asdf/shims:$PATH"
 
+# Trigger asdf to use the installed versions in this shell
+asdf reshim
+
 # Prepare summary table data
 check_tool() {
     local cmd="$1"

@@ -2,6 +2,20 @@
 #export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 
 
+# Homebrew path detection
+if [ -f "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -f "/usr/local/bin/brew" ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+# asdf configuration
+if [ -f "$HOME/.asdf/asdf.sh" ]; then
+    source "$HOME/.asdf/asdf.sh"
+elif [ -n "$HOMEBREW_PREFIX" ] && [ -f "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]; then
+    source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -143,13 +157,12 @@ eval "$(starship init zsh)"
 #SPACESHIP_DIR_TRUNC_REPO=false
 
 
-#############################################
-#
-#   antigen
-#
-#############################################
-#source $HOMEBREW_PREFIX/share/antigen/antigen.zsh
-source /usr/local/share/antigen/antigen.zsh
+# Antigen configuration
+if [ -n "$HOMEBREW_PREFIX" ] && [ -f "$HOMEBREW_PREFIX/share/antigen/antigen.zsh" ]; then
+    source "$HOMEBREW_PREFIX/share/antigen/antigen.zsh"
+elif [ -f "/usr/local/share/antigen/antigen.zsh" ]; then
+    source "/usr/local/share/antigen/antigen.zsh"
+fi
 
 #antigen init $HOME/.antigenrc
 
@@ -218,5 +231,9 @@ alias grep='grep --color=auto'
 # pnpm end
 
 
-# must be last
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Zsh syntax highlighting
+if [ -n "$HOMEBREW_PREFIX" ] && [ -f "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+    source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+elif [ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+    source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
