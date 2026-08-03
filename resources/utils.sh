@@ -71,23 +71,6 @@ ask_for_confirmation() {
   read -r
 }
 
-ask_for_sudo() {
-    print_in_blue "  🔐 Enter password for sudo privileges…"
-    print_with_newline
-
-    # Update sudo timestamp until the script has finished
-    # We use -p to set a custom prompt that includes indentation
-    sudo -p "  🔐 Password: " -v
-    while true; do
-        sudo -n true
-        sleep 60
-        kill -0 "$$" || exit
-    done &
-    SUDO_PID=$!
-    set_trap "EXIT" "kill $SUDO_PID &> /dev/null; kill_all_subprocesses"
-    set_trap "INT" "kill $SUDO_PID &> /dev/null; kill_all_subprocesses; exit 1"
-}
-
 ask_for_reboot() {
     print_after_newline "  Do you want to restart?" "ask_for_confirmation"
 

@@ -13,9 +13,6 @@ print_step 1 5 "Collecting configuration"
 # Confirm user intent before proceeding.
 confirm_install
 
-# Ask for sudo early to avoid multiple prompts
-ask_for_sudo
-
 source "./steps/005_collect_config.sh"
 
 # System & GitHub Setup
