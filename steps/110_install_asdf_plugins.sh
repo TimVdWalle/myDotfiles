@@ -31,8 +31,14 @@ for plugin in "${plugins[@]}"; do
         # Ensure libyaml and other dependencies from homebrew are used
         export RUBY_CONFIGURE_OPTS="--with-libyaml-dir=$(brew --prefix libyaml) --with-openssl-dir=$(brew --prefix openssl) --with-readline-dir=$(brew --prefix readline) --with-gmp-dir=$(brew --prefix gmp)"
     fi
-    execute "asdf install $plugin latest" "Installing latest $plugin"
-    execute "asdf global $plugin latest" "Setting global $plugin to latest"
+    # Check if latest version is already installed to avoid redundant work and output
+    latest_version=$(asdf latest "$plugin")
+    if asdf list "$plugin" | grep -q "$latest_version"; then
+        print_success "latest $plugin ($latest_version) is already installed."
+    else
+        execute "asdf install $plugin latest" "Installing latest $plugin"
+    fi
+    asdf set -u "$plugin" latest
     asdf reshim
 done
 

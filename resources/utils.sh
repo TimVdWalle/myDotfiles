@@ -157,7 +157,7 @@ get_answer() {
 }
 
 is_git_repository() {
-    git rev-parse &> /dev/null
+    git rev-parse --is-inside-work-tree &> /dev/null
 }
 
 mkd() {

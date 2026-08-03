@@ -16,7 +16,7 @@ if [ ! -f ~/.zshrc ]; then
     touch ~/.zshrc
 fi
 
-source "./resources/install_fonts.sh"
+execute "source ./resources/install_fonts.sh" "Installing fonts..."
 
 # install starship prompt
 if ! cmd_exists "starship"; then

@@ -34,7 +34,7 @@ for file in "${list_of_dotfiles[@]}"; do
 
     # Remove existing file in the home directory if it exists
     if [ -L "$link_file" ]; then
-      print_info "Removing existing symlink $file in home directory."
+      # No need to log removal of old symlink if we are about to create a new one
       rm "$link_file"
     elif [ -e "$link_file" ]; then
       print_warning "Backing up existing file/directory $file to $file.bak"
@@ -42,14 +42,18 @@ for file in "${list_of_dotfiles[@]}"; do
     fi
 
     # Create a new symlink
-    execute "ln -s $target_file $link_file" "Creating symlink for $file"
+    if ln -s "$target_file" "$link_file"; then
+        print_success "Symlinked $file"
+    else
+        print_error "Failed to symlink $file"
+    fi
   else
     # Check if it's .zshrc and if it exists in home dir but not in repo
     if [[ "$file" == ".zshrc" ]] && [[ -f "$link_file" ]] && [[ ! -f "$target_file" ]]; then
        print_info "Found .zshrc in home but not in repo. Moving it to repo to track it."
        mkdir -p "$(dirname "$target_file")"
        mv "$link_file" "$target_file"
-       execute "ln -s $target_file $link_file" "Creating symlink for $file"
+       ln -s "$target_file" "$link_file"
     else
        print_warning "Skipping $file since it does not exist in $dotfiles_dir."
     fi

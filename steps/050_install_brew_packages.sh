@@ -7,7 +7,7 @@ source "./resources/utils-macos.sh"
 # but only for the bundle command.
 if [ "$IS_TESTING" = "true" ]; then
   # In testing mode, we use --no-upgrade to speed things up
-  execute "HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew bundle --no-upgrade --file ./resources/Brewfile" "Installing/Checking tools + apps from Brewfile (no-upgrade mode)"
+  execute "HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew bundle --no-upgrade --no-lock --file ./resources/brewfile" "Installing/Checking tools + apps from brewfile (no-upgrade mode)"
 else
-  execute "HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew bundle --file ./resources/Brewfile" "Installing tools + apps from Brewfile"
+  execute "HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew bundle --no-lock --file ./resources/brewfile" "Installing tools + apps from brewfile"
 fi

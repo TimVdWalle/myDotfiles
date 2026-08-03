@@ -24,7 +24,7 @@ run_execute_script "Linking local dotfiles folder with github..." "./steps/040_l
 
 # Applications & Tools
 print_step 3 5 "Installing Applications & Tools"
-run_execute_script "Installing tools + apps from brewfile..." "brew bundle --file ./resources/brewfile"
+run_execute_script "Installing tools + apps from brewfile..." "./steps/050_install_brew_packages.sh"
 run_execute_script "Cloning my repositories to local..." "./steps/080_clone_github_repositories.sh"
 run_execute_script "Installing asdf plugins node, ruby, python..." "./steps/110_install_asdf_plugins.sh"
 
