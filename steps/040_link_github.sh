@@ -7,17 +7,15 @@ pushd "$(dirname "$0")/.." > /dev/null
 
 # Check if git is initialized in the current directory
 if ! is_git_repository; then
-    print_info "Not a git repository. Initializing..."
     # Suppress the advice about default branch name by setting it explicitly
     git config --global init.defaultBranch main
-    execute "git init" "Initializing git"
-else
-    print_success "Already a git repository."
+    git init &>/dev/null
+    print_success "Initialized git"
 fi
 
-# Check if 'origin' remote is already set
+# Check for 'origin' remote is already set
 if git remote -v | grep -q "origin"; then
-    print_success "Origin already set."
+    :
 else
     print_info "Setting origin..."
     if [ -n "$DOTFILES_REMOTE" ]; then

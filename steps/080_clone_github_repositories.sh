@@ -24,7 +24,7 @@ clone_repo() {
 }
 
 if [ "$IS_TESTING" = "true" ]; then
-    print_info "Skipping repository cloning in testing mode."
+    :
 else
     clone_repo "git@github.com:TimVdWalle/dart-score.git" "$LARAVEL/dart-score" "Cloning dart-score"
     clone_repo "git@github.com:TimVdWalle/commit-verbs.git" "$OTHER/commit-verbs" "Cloning commit-verbs"
@@ -35,7 +35,14 @@ fi
 # setup git hook script(s)
 if [ -f "$OTHER/commit-verbs/git-templates/hooks/prepare-commit-msg" ]; then
   chmod +x "$OTHER/commit-verbs/git-templates/hooks/prepare-commit-msg"
-  execute "git config --global init.templateDir $OTHER/commit-verbs/git-templates" "Setting up git init template"
+  # Only set if it's not already set
+  current_template=$(git config --global init.templateDir)
+  if [ "$current_template" != "$OTHER/commit-verbs/git-templates" ]; then
+    git config --global init.templateDir "$OTHER/commit-verbs/git-templates"
+  fi
 fi
 
-print_success "GitHub repositories check complete."
+# Check if we should log overall success
+if [ "$IS_TESTING" != "true" ]; then
+    print_success "GitHub repositories check complete."
+fi

@@ -13,19 +13,25 @@ if ! cmd_exists "brew"; then
   else
       eval "$(/usr/local/bin/brew shellenv)"
   fi
-else
-  print_success "HomeBrew already installed."
 fi
 
 # Update Homebrew recipes
-execute "brew update" "Updating Homebrew recipes"
+if [ "$IS_TESTING" = "true" ]; then
+  # In testing mode, brew update is often redundant if brew was just checked
+  # but let's just make it quieter if it's already up to date.
+  brew update &>/dev/null
+  # We should probably still print something so the user knows this step finished.
+  # But the requirement was to clean up. The execute call in bootstrap will print something.
+  # Wait, bootstrap calls run_execute_script "Installing HomeBrew..." "./steps/030_install_homebrew.sh"
+  # So "Installing HomeBrew..." will be printed by execute in bootstrap.sh
+else
+  execute "brew update" "Updating Homebrew recipes"
+fi
 
 # 'brew upgrade' checks all your installed packages for updates.
 # It can take a long time if you have many packages, even if they are up to date,
 # because it has to verify each one against the latest version online.
-if [ "$IS_TESTING" = "true" ]; then
-  print_info "Skipping 'brew upgrade' because you are in testing mode."
-else
+if [ "$IS_TESTING" != "true" ]; then
   execute "brew upgrade" "Upgrading Homebrew"
 fi
 
