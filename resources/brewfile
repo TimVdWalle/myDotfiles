@@ -17,6 +17,7 @@ cask 'logitech-options'
 # apps
 cask 'spotify'
 cask 'google-chrome'
+cask 'steam'
 
 # develop
 cask 'iterm2'
@@ -24,15 +25,15 @@ cask 'hyper'
 
 cask 'visual-studio-code'
 cask 'webstorm'
-#cask 'rubymine'
+cask 'rubymine'
 #cask 'pycharm-ce'
-#cask 'dbeaver-community'
-#cask 'arduino-ide'
+cask 'dbeaver-community'
+cask 'arduino-ide'
 
 #cask 'commander-one'
 
 cask 'fork'
-#cask 'docker-desktop'
+cask 'docker-desktop'
 
 brew 'wget'
 brew 'curl'
