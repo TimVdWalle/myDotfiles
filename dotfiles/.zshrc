@@ -10,14 +10,18 @@ elif [ -f "/usr/local/bin/brew" ]; then
 fi
 
 # asdf configuration
+# In 0.20.0 (Go version), asdf.sh might not exist when installed via Homebrew.
+# We always ensure shims are in PATH.
+export PATH="$HOME/.asdf/shims:$PATH"
+
 if [ -f "$HOME/.asdf/asdf.sh" ]; then
     source "$HOME/.asdf/asdf.sh"
-    export PATH="$HOME/.asdf/shims:$PATH"
 elif [ -n "$HOMEBREW_PREFIX" ] && [ -f "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]; then
     source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
-    # asdf.sh usually handles shims if sourced, but sometimes it needs manual help
-    export PATH="$HOME/.asdf/shims:$PATH"
 fi
+
+# nodejs alias for convenience
+alias nodejs='node'
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"

@@ -44,18 +44,16 @@ fi
 
 if cmd_exists "asdf"; then
     # Add asdf to .zshrc if not present
-    if ! grep -q "asdf.sh" "$HOME/.zshrc"; then
+    if ! grep -q "asdf.sh" "$HOME/.zshrc" && ! grep -q ".asdf/shims" "$HOME/.zshrc"; then
         print_info "Adding asdf to .zshrc"
         echo "\n# asdf version manager" >> "$HOME/.zshrc"
+        echo "export PATH=\"\$HOME/.asdf/shims:\$PATH\"" >> "$HOME/.zshrc"
         if [ -f "$HOME/.asdf/asdf.sh" ]; then
              echo "source $HOME/.asdf/asdf.sh" >> "$HOME/.zshrc"
-             echo "export PATH=\"\$HOME/.asdf/shims:\$PATH\"" >> "$HOME/.zshrc"
         elif [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
              echo "source /opt/homebrew/opt/asdf/libexec/asdf.sh" >> "$HOME/.zshrc"
-             echo "export PATH=\"\$HOME/.asdf/shims:\$PATH\"" >> "$HOME/.zshrc"
         elif [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
              echo "source /usr/local/opt/asdf/libexec/asdf.sh" >> "$HOME/.zshrc"
-             echo "export PATH=\"\$HOME/.asdf/shims:\$PATH\"" >> "$HOME/.zshrc"
         fi
     fi
 fi

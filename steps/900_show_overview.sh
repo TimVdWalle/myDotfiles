@@ -9,6 +9,8 @@ elif [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ]; then
     source "/opt/homebrew/opt/asdf/libexec/asdf.sh"
 elif [ -f "/usr/local/opt/asdf/libexec/asdf.sh" ]; then
     source "/usr/local/opt/asdf/libexec/asdf.sh"
+elif [ -f "/usr/local/bin/asdf" ]; then
+    export PATH="/usr/local/bin:$PATH"
 fi
 
 # Ensure asdf shims are in PATH

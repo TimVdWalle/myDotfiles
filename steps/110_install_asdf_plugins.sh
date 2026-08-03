@@ -9,6 +9,10 @@ elif [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
     source /opt/homebrew/opt/asdf/libexec/asdf.sh
 elif [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
     source /usr/local/opt/asdf/libexec/asdf.sh
+elif [ -f /usr/local/bin/asdf ]; then
+    # For asdf 0.20.0+ (Go version) via Homebrew, asdf.sh might not exist
+    # but the binary is available. We just need it in PATH.
+    export PATH="/usr/local/bin:$PATH"
 fi
 
 # Ensure asdf shims are in PATH
