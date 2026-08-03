@@ -12,8 +12,11 @@ fi
 # asdf configuration
 if [ -f "$HOME/.asdf/asdf.sh" ]; then
     source "$HOME/.asdf/asdf.sh"
+    export PATH="$HOME/.asdf/shims:$PATH"
 elif [ -n "$HOMEBREW_PREFIX" ] && [ -f "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]; then
     source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
+    # asdf.sh usually handles shims if sourced, but sometimes it needs manual help
+    export PATH="$HOME/.asdf/shims:$PATH"
 fi
 
 # Path to your oh-my-zsh installation.

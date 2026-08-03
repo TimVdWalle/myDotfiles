@@ -17,6 +17,11 @@ export PATH="$HOME/.asdf/shims:$PATH"
 # Trigger asdf to use the installed versions in this shell
 asdf reshim
 
+# Helper to check if a command exists in the current shell
+check_cmd() {
+    command -v "$1" &> /dev/null
+}
+
 # Prepare summary table data
 check_tool() {
     local cmd="$1"
@@ -25,7 +30,7 @@ check_tool() {
     local tool_status="❌"
     local tool_version="not installed"
 
-    if command -v "$cmd" &> /dev/null; then
+    if check_cmd "$cmd"; then
         tool_status="✅"
         tool_version=$(eval "$version_cmd" 2>/dev/null)
     fi
