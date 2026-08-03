@@ -117,11 +117,8 @@ kill_all_subprocesses() {
 execute() {
     local -r CMDS="$1"
     local -r MSG="${2:-$1}"
-    local -r ERR_FILE="$(mktemp /tmp/myDotfiles_err_XXXXX)"
-    local -r OUT_FILE="$(mktemp /tmp/myDotfiles_out_XXXXX)"
 
     local exitCode=0
-    local cmdsPID=""
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -133,64 +130,23 @@ execute() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # Execute commands in background
-    # We use a subshell to ensure it handles the command correctly
-    (
-        eval "$CMDS"
-    ) &> "$OUT_FILE" 2> "$ERR_FILE" &
+    # Print the message
+    print_info "$MSG"
 
-    cmdsPID=$!
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    # Show a spinner if the commands
-    # require more time to complete.
-
-    local elapsed_time=""
-    elapsed_time=$(show_spinner "$cmdsPID" "$CMDS" "$MSG" "$ERR_FILE")
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    # Wait for the commands to no longer be executing
-    # in the background, and then get their exit code.
-
-    wait "$cmdsPID" &> /dev/null
+    # Execute commands in foreground so output is visible
+    local START_TIME=$(date +%s)
+    eval "$CMDS"
     exitCode=$?
-
-    # If the background process asks for sudo, it might fail in execute
-    # so we check if the exit code is 1 and if the error log contains sudo related errors
-    if ( [ $exitCode -ne 0 ] || kill -0 "$cmdsPID" 2>/dev/null ) && (grep -qi "sudo" "$ERR_FILE" 2>/dev/null || grep -qi "password" "$ERR_FILE" 2>/dev/null || grep -q "Sorry, try again." "$ERR_FILE" 2>/dev/null); then
-        # If it's still running, kill it
-        kill "$cmdsPID" &>/dev/null
-        # Use tput to ensure we are at the beginning of the line
-        printf "\r" >&2
-        tput el >&2
-        print_warning "Interactive input or sudo password required for: $MSG"
-        # We try to run it in the foreground now.
-        eval "$CMDS"
-        exitCode=$?
-    fi
+    local END_TIME=$(date +%s)
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Calculate elapsed time
+    local elapsed=$(( END_TIME - START_TIME ))
+    local time_str=$(printf "%02d:%02d" $(( elapsed / 60 )) $(( elapsed % 60 )))
 
     # Print output based on what happened.
-
-    print_result $exitCode "$MSG" "$elapsed_time"
-
-    if [ $exitCode -ne 0 ]; then
-        if [ -s $ERR_FILE ]; then
-            print_error "Command failed. Recent error output:"
-            print_error_stream < "$ERR_FILE"
-        else
-            print_warning "Command finished with warnings. Recent output:"
-            print_warning_stream < "$OUT_FILE"
-        fi
-    fi
-
-    rm -rf "$ERR_FILE"
-    rm -rf "$OUT_FILE"
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    print_result $exitCode "$MSG" "$time_str"
 
     return $exitCode
 
@@ -404,58 +360,4 @@ skip_questions() {
     done
 
     return 1
-}
-
-show_spinner() {
-    local -r FRAMES='/-\|'
-
-    # shellcheck disable=SC2034
-    local -r NUMBER_OR_FRAMES=${#FRAMES}
-
-    local -r CMDS="$2"
-    local -r MSG="$3"
-    local -r PID="$1"
-    local -r ERR_FILE="$4"
-    local -r START_TIME=$(date +%s)
-
-    local i=0
-    local frameText=""
-
-    # Display spinner while the commands are being executed.
-    while kill -0 "$PID" &>/dev/null; do
-        # Check if the process is waiting for sudo password
-        if [ -f "$ERR_FILE" ] && (grep -qi "sudo" "$ERR_FILE" 2>/dev/null || grep -qi "password" "$ERR_FILE" 2>/dev/null); then
-            # If we detect a sudo request, we kill the background process
-            # so that execute() can catch it and run it in the foreground
-            kill "$PID" &>/dev/null
-            break
-        fi
-
-        # In Zsh, strings are 1-indexed.
-        # Use (( ... )) for arithmetic and calculate the index.
-        local idx=$(( (i % NUMBER_OR_FRAMES) + 1 ))
-        local current_time=$(date +%s)
-        local elapsed=$(( current_time - START_TIME ))
-        local time_str=$(printf "%02d:%02d" $(( elapsed / 60 )) $(( elapsed % 60 )))
-        
-        frameText="   [${FRAMES[$idx]}] $MSG ($time_str) "
-        # Print frame text to stderr so it's not captured by variable assignment
-        printf "\r%s" "$frameText" >&2
-        (( i++ ))
-        sleep 0.2
-        tput el >&2
-    done
-    
-    # Calculate final time
-    local final_time=$(date +%s)
-    local total_elapsed=$(( final_time - START_TIME ))
-    local final_time_str=$(printf "%02d:%02d" $(( total_elapsed / 60 )) $(( total_elapsed % 60 )))
-
-    # Print one last time to ensure it finishes clean or is cleared (to stderr)
-    # Use printf "\r" and tput el to clear the line before return
-    printf "\r" >&2
-    tput el >&2
-    
-    # Return the final time string so execute() can use it (to stdout)
-    printf "%s" "$final_time_str"
 }
