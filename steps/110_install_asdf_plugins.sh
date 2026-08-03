@@ -39,9 +39,9 @@ for plugin in "${plugins[@]}"; do
         execute "asdf install $plugin latest" "Installing latest $plugin"
     fi
     asdf set -u "$plugin" latest
-    asdf global "$plugin" latest
-    # Ensure current shell uses it
-    asdf shell "$plugin" latest
+    # Version 0.20.0 help shows 'asdf set [-u] [-p] <name> <versions...>'
+    # and 'asdf install <name> latest'
+    # 'asdf set -u' sets the version in $HOME/.tool-versions
     asdf reshim
 done
 
