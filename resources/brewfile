@@ -18,6 +18,7 @@ cask 'logitech-options'
 cask 'spotify'
 cask 'google-chrome'
 cask 'steam'
+cask 'chatgpt'
 
 # develop
 cask 'iterm2'
